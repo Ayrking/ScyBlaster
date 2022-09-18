@@ -1,10 +1,8 @@
 package io.github.meltwin.scyblaster.starter.gui;
 
-import io.github.meltwin.scyblaster.starter.Starter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import sun.awt.X11.Screen;
 
 import javax.swing.*;
 

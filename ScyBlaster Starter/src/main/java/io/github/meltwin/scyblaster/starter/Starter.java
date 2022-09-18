@@ -1,12 +1,8 @@
 package io.github.meltwin.scyblaster.starter;
 
 import io.github.meltwin.scyblaster.starter.gui.GUILoader;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.MarkerManager;
-
-import java.util.Properties;
 
 /**
  * Starter App
@@ -19,8 +15,10 @@ public class Starter {
 
     public Starter() {
         log.info("Starting Scyblaster 0.1-SNAPSHOT");
-        gui_loader.makeGUI();
+        getGuiLoader().makeGUI();
     }
+
+    public GUILoader getGuiLoader() { return gui_loader; }
 
     // Starting function
     public static void main(String[] args) {

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import static java.lang.System.exit;
@@ -34,12 +35,13 @@ public class JsonFile extends JSONObject {
 
         try {
             // Read all bytes then make it a string
+            assert handle != null;
             byte[] data = new byte[handle.available()];
             handle.read(data, 0, handle.available());
             out = new String(data);
             logger.trace("Read successfully !");
         }
-        catch (Exception e) {
+        catch (IOException | NullPointerException e) {
             logger.fatal("Error during loading !");
             e.printStackTrace();
             exit(-1);
