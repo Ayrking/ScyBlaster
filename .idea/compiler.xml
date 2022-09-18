@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ScyBlast Starter" />
+        <module name="SycBlaster Launcher" />
+        <module name="sycBlaster.launcher" />
+        <module name="ScyBlaster Starter" />
       </profile>
     </annotationProcessing>
   </component>
