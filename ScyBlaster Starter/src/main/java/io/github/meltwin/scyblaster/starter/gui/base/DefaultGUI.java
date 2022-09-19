@@ -7,6 +7,8 @@ import io.github.meltwin.scyblaster.starter.gui.GUILoader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -18,16 +20,29 @@ import java.io.IOException;
 public class DefaultGUI extends BaseGUI<DefaultGUIConfig> {
 
     protected final JLabel background;
+    protected final JProgressBar progress;
 
     public DefaultGUI(final @NotNull DefaultGUIConfig config) {
         super(config);
+        this.setBackground(Color.CYAN);
+
+        JLayeredPane panel = new JLayeredPane();
+        //panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         // Adding new components
         background = new JLabel(new ImageIcon(this.getBackgroundIMG()));
-        this.add(background);
+        background.setBounds(0, 0, 500, 350);
+        panel.add(background, 0, 0);
 
-        // Show everything
-        this.pack();
+        progress = new JProgressBar();
+        progress.setValue(50);
+        progress.setBounds(46, 236, 406, 50);
+        panel.add(progress, 1, 1);
+
+        panel.setVisible(true);
+        this.add(panel);
+        this.revalidate();
+        this.repaint();
     }
 
     /*

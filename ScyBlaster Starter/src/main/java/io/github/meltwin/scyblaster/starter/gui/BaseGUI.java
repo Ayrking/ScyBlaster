@@ -31,8 +31,8 @@ public abstract class BaseGUI<T extends GUIConfig> extends JFrame {
         logger.trace("Setting JFrame Properties.");
         this.setSize(conf.width(), conf.height());
         this.setTitle(conf.title());
-        this.setResizable(false);
-        this.setUndecorated(true);
+        //this.setResizable(false);
+        //this.setUndecorated(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
