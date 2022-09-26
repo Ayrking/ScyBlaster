@@ -7,9 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SycBlaster Launcher" />
-        <module name="sycBlaster.launcher" />
-        <module name="ScyBlaster Starter" />
+        <module name="Commons" />
+        <module name="scyblaster.launcher" />
+        <module name="scyblaster.starter" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ScyBlaster Starter" target="1.8" />
+      <module name="sycBlaster.launcher" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -9,10 +9,31 @@
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
 
+    <!-- Module division -->
     <modules>
-        <module>SycBlaster Launcher</module>
-        <module>ScyBlaster Starter</module>
+        <module>Commons</module>
+        <module>Starter</module>
+        <module>Launcher</module>
     </modules>
+
+    <!-- Dependencies for the whole project -->
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
