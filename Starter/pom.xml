@@ -46,7 +46,9 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <classifier>starter-full</classifier>
                     <appendAssemblyId>false</appendAssemblyId>
+                    <outputDirectory>${project.parent.basedir}/build</outputDirectory>
                     <archive>
                         <manifest>
                             <mainClass>io.github.meltwin.scyblaster.starter.Starter</mainClass>

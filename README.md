@@ -34,7 +34,7 @@ To build the launcher, you can just type the following command at the root of th
 
 It will generate the starter and the launcher at :
 
-- __Starter__   : ./Starter/target/ScyblasterStarter-***Version***.jar
-- __Launcher__  : ./Launcher/target/ScyblasterLauncher-***Version***.jar
+- __Starter__   : ./build/ScyblasterStarter-***Version***.jar
+- __Launcher__  : ./build/ScyblasterLauncher-***Version***.jar
 
 <p align="center"><i> Copyright © - 2022 <a href="https://github.com/Meltwin">Meltwin</a> </i></p>
