@@ -7,6 +7,7 @@ import java.net.URL;
 
 /**
  * Loader for GUI configurations
+ * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */

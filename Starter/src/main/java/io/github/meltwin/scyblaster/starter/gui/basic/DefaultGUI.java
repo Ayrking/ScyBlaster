@@ -15,6 +15,7 @@ import java.io.IOException;
 
 /**
  * The Default GUI of the starter
+ * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */

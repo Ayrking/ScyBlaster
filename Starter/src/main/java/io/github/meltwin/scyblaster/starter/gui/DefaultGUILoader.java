@@ -6,6 +6,7 @@ import io.github.meltwin.scyblaster.starter.gui.basic.DefaultGUIConfig;
 
 /**
  * Loader for Default Starter GUI
+ * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */
