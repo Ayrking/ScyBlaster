@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Starter App
- * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
+ * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */

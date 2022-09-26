@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 /**
  * Class wrapping GUI Configurations
- * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
+ * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 /**
  * Extension of GUIConfig for the Default GUI
- * @<code>Copyright: GNU APGLv3 - (C) 2022 Meltwin</code>
+ * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
  * @author meltwin
  * @since 0.1-SNAPSHOT
  */
