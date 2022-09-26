@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * Methods for resource images interactions
@@ -21,6 +22,6 @@ public abstract class ResourceIMG {
      */
     public static BufferedImage getResourceIMG(@NotNull String filepath) throws IOException, IllegalArgumentException {
         InputStream img = ResourceIMG.class.getClassLoader().getResourceAsStream(filepath);
-        return ImageIO.read(img);
+        return ImageIO.read(Objects.requireNonNull(img));
     }
 }
