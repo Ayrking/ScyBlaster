@@ -58,6 +58,6 @@ public final class EventDispatcher {
             }
         }
         else
-            logger.warn(String.format(MSG_NO_LISTENER, event.getClass().getSimpleName()));
+            logger.error(String.format(MSG_NO_LISTENER, event.getClass().getSimpleName()));
     }
 }

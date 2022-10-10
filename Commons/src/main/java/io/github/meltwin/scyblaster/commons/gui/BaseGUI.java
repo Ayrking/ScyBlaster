@@ -61,7 +61,7 @@ public abstract class BaseGUI<T extends BaseGUIConfig> extends JFrame {
         logger.trace(MSG_SETTINGS);
         this.setSize(config.width(), config.height());
         this.setTitle(config.title());
-        //this.setResizable(false);
+        this.setResizable(false);
         //this.setUndecorated(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
