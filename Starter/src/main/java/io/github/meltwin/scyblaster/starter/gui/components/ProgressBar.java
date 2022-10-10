@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class ProgressBar extends JProgressBar {
 
+    public static final String CONFIG_INDEX = "progress";
     protected final ProgressBarConfig conf;
 
     public ProgressBar(final @NotNull ProgressBarConfig config) {

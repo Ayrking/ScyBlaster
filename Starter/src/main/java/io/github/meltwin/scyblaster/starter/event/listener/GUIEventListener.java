@@ -19,7 +19,7 @@ public interface GUIEventListener extends EventListener {
 
     @Override
     default IEventScope[] getScopes() {
-        return new IEventScope[]{GUIScope.TEXT_EVENT};
+        return new IEventScope[]{GUIScope.TEXT_EVENT, GUIScope.PROGRESS_EVENT};
     }
 
     @Override
