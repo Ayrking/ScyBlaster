@@ -65,7 +65,9 @@ public class DefaultGUI extends BaseGUI<DefaultGUIConfig> implements GUIEventLis
     }
     private @NotNull ProgressBar setProgressBar() {
         ProgressBar pro = new ProgressBar(new ProgressBarConfig(config.getJSONObject("comp"), ProgressBar.CONFIG_INDEX));
-        pro.setValue(50);
+        pro.setValue(0);
+        pro.setMaximum(100);
+        pro.setMinimum(0);
         panel.add(pro, 1, 1);
         return pro;
     }

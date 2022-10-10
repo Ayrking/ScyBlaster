@@ -12,10 +12,10 @@ import java.awt.*;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public class FontConfig extends BaseComponentConfig {
+public class FontConfig extends BaseJSONObject {
     public FontConfig(final @NotNull JSONObject parent, final @NotNull String index) {
         super(parent, index);
-        logger.info("Loaded Font configs");
+        logger.trace("Loaded Font configs");
     }
 
     /*

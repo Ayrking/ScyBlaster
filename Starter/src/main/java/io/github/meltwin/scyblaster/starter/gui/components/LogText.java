@@ -24,5 +24,7 @@ public class LogText extends JLabel {
         this.setBounds(this.conf.getBounds());
         this.setFont(this.conf.getFont());
         this.setForeground(this.conf.getColor());
+        this.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setVerticalAlignment(SwingConstants.CENTER);
     }
 }

@@ -5,16 +5,51 @@
     <parent>
         <artifactId>scyblaster</artifactId>
         <groupId>io.github.meltwin</groupId>
-        <version>0.1-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>scyblaster.launcher</artifactId>
+    <version>0.1.0</version>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <finalName>ScyblasterLauncher-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classifier>launcher-full</classifier>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <outputDirectory>${project.parent.basedir}/build</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.github.meltwin.scyblaster.launcher.Launcher</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Author>Meltwin</Author>
+                            <Version>${project.version}</Version>
+                        </manifestEntries>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

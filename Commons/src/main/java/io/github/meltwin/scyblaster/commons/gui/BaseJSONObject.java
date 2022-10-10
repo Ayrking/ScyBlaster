@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public abstract class BaseComponentConfig extends JSONObject {
+public abstract class BaseJSONObject extends JSONObject {
 
     protected final Logger logger = LogManager.getRootLogger();
     protected final String MISSING_PARAMETER;
@@ -25,7 +25,7 @@ public abstract class BaseComponentConfig extends JSONObject {
                Constructor
         =========================
      */
-    public BaseComponentConfig(final @NotNull JSONObject parent, final @NotNull String index) {
+    public BaseJSONObject(final @NotNull JSONObject parent, final @NotNull String index) {
         super(readJSONObject(parent, index));
 
         // MSG Configurations

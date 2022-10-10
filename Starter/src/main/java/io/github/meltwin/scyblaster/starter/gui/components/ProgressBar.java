@@ -5,6 +5,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+/**
+ * ProgressBar for the default gui
+ * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
+ * @author Meltwin
+ * @since 0.1-SNAPSHOT
+ */
 public class ProgressBar extends JProgressBar {
 
     public static final String CONFIG_INDEX = "progress";

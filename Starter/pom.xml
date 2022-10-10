@@ -6,12 +6,12 @@
     <parent>
         <artifactId>scyblaster</artifactId>
         <groupId>io.github.meltwin</groupId>
-        <version>0.1-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>scyblaster.starter</artifactId>
-    <version>${project.parent.version}</version>
+    <version>0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>io.github.meltwin</groupId>
             <artifactId>scyblaster.commons</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -53,6 +53,10 @@
                         <manifest>
                             <mainClass>io.github.meltwin.scyblaster.starter.Starter</mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <Author>Meltwin</Author>
+                            <Version>${project.version}</Version>
+                        </manifestEntries>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>

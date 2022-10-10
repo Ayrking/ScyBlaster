@@ -1,7 +1,7 @@
 package io.github.meltwin.scyblaster.starter.gui.components.config;
 
 import io.github.meltwin.scyblaster.commons.Pair;
-import io.github.meltwin.scyblaster.commons.gui.BaseComponentConfig;
+import io.github.meltwin.scyblaster.commons.gui.BaseJSONObject;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -13,7 +13,7 @@ import java.awt.*;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public class ProgressBarConfig extends BaseComponentConfig {
+public class ProgressBarConfig extends BaseJSONObject {
 
     public ProgressBarConfig(final @NotNull JSONObject parent, final @NotNull String index) {
         super(parent, index);

@@ -1,6 +1,6 @@
 {
   "sync": {
     "type": "HTTP",
-    "href": "localhost/scyblaster/latest_launcher.json"
+    "href": "http://localhost/Scyblaster/latest_launcher.json"
   }
 }
