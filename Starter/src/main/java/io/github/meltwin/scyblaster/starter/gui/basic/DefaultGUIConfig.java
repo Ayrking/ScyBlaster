@@ -7,7 +7,7 @@ import org.json.JSONObject;
 /**
  * Extension of GUIConfig for the Default GUI
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public class DefaultGUIConfig extends BaseGUIConfig {

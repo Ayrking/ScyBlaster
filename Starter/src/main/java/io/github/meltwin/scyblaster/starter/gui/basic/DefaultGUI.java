@@ -4,6 +4,10 @@ import io.github.meltwin.scyblaster.commons.gui.BaseGUI;
 import io.github.meltwin.scyblaster.commons.io.ResourceIMG;
 
 import io.github.meltwin.scyblaster.starter.Starter;
+import io.github.meltwin.scyblaster.starter.event.ProgressBarMaxEvent;
+import io.github.meltwin.scyblaster.starter.event.ProgressBarValueEvent;
+import io.github.meltwin.scyblaster.starter.event.TextEvent;
+import io.github.meltwin.scyblaster.starter.event.listener.GUIEventListener;
 import io.github.meltwin.scyblaster.starter.gui.components.ProgressBar;
 import io.github.meltwin.scyblaster.starter.gui.components.config.ProgressBarConfig;
 import org.jetbrains.annotations.NotNull;
@@ -16,11 +20,12 @@ import java.io.IOException;
 /**
  * The Default GUI of the starter
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public class DefaultGUI extends BaseGUI<DefaultGUIConfig> {
+public class DefaultGUI extends BaseGUI<DefaultGUIConfig> implements GUIEventListener {
 
+    protected final JLayeredPane panel;
     protected final JLabel background;
     protected final JProgressBar progress;
 
@@ -28,22 +33,35 @@ public class DefaultGUI extends BaseGUI<DefaultGUIConfig> {
         super(config);
         this.setBackground(Color.CYAN);
 
-        JLayeredPane panel = new JLayeredPane();
+        panel = new JLayeredPane();
         //panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        background = setBackground();
+        progress = setProgressBar();
 
-        // Adding new components
-        background = new JLabel(new ImageIcon(this.getBackgroundIMG()));
-        background.setBounds(0, 0, 500, 350);
-        panel.add(background, 0, 0);
-
-        progress = new ProgressBar(new ProgressBarConfig(config.getJSONObject("comp").getJSONObject("progress").toString()));
-        progress.setValue(50);
-        panel.add(progress, 1, 1);
-
+        this.register();
         panel.setVisible(true);
         this.add(panel);
         this.revalidate();
         this.repaint();
+    }
+
+    /*
+     *  #########################
+     *      Components Making
+     *           methods
+     *  #########################
+     */
+    private @NotNull JLabel setBackground() {
+        JLabel back = new JLabel(new ImageIcon(this.getBackgroundIMG()));
+        back.setBounds(0, 0, 500, 350);
+        panel.add(back, 0, 0);
+        return back;
+    }
+    private @NotNull ProgressBar setProgressBar() {
+        ProgressBar pro = new ProgressBar(new ProgressBarConfig(config.getJSONObject("comp").getJSONObject("progress").toString()));
+        pro.setValue(50);
+        panel.add(pro, 1, 1);
+        return pro;
     }
 
     /*
@@ -81,4 +99,19 @@ public class DefaultGUI extends BaseGUI<DefaultGUIConfig> {
     private BufferedImage getBackgroundIMG() {
         return getBackgroundIMG(config.getBackground());
     }
+
+    /*
+     *  #########################
+     *        Event Handling
+     *           methods
+     *  #########################
+     */
+    @Override
+    public void onTextEvent(@NotNull TextEvent event) {
+
+    }
+    @Override
+    public void onProgressValueEvent(final @NotNull ProgressBarValueEvent event) { progress.setValue(event.getValue()); }
+    @Override
+    public void onProgressMaxEvent(final @NotNull ProgressBarMaxEvent event) { progress.setMaximum(event.getValue()); }
 }

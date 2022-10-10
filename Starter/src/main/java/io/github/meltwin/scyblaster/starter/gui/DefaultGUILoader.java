@@ -7,7 +7,7 @@ import io.github.meltwin.scyblaster.starter.gui.basic.DefaultGUIConfig;
 /**
  * Loader for Default Starter GUI
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public final class DefaultGUILoader extends GUILoader {

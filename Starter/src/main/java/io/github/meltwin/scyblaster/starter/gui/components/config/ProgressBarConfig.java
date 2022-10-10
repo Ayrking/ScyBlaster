@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * Object containing the main ProgressBar configuration
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public class ProgressBarConfig extends JSONObject {
