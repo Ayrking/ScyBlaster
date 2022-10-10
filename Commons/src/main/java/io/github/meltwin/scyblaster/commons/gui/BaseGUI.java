@@ -11,7 +11,7 @@ import javax.swing.*;
  * Basic class for the GUI
  * Should be extended.
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public abstract class BaseGUI<T extends BaseGUIConfig> extends JFrame {
@@ -66,7 +66,4 @@ public abstract class BaseGUI<T extends BaseGUIConfig> extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
-
 }

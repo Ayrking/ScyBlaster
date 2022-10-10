@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Class wrapping GUI Configurations
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public class BaseGUIConfig extends JSONFile {

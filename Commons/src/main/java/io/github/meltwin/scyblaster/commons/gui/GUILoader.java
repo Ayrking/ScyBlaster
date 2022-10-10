@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * Loader for GUI configurations
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public abstract class GUILoader {
@@ -22,6 +22,8 @@ public abstract class GUILoader {
 
     protected static final String DEFAULT_GUI_FILE = "default/GUI_config.json";
     protected static final String CUSTOM_GUI_FILE = "custom/GUI_config.json";
+
+    protected BaseGUI gui;
 
     /*
         =========================

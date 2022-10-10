@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Methods for resource images interactions
  * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
- * @author meltwin
+ * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
 public abstract class ResourceIMG {
