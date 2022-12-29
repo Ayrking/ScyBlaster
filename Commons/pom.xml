@@ -5,20 +5,20 @@
     <parent>
         <artifactId>scyblaster</artifactId>
         <groupId>io.github.meltwin</groupId>
-        <version>0.1.0</version>
+        <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>scyblaster.commons</artifactId>
-    <version>${project.parent.version}</version>
+    <version>${project.parent.version}-1</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20220320</version>
-        </dependency>
-    </dependencies>
+    <!-- Package Export -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Ayrking/ScyBlaster-Core</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

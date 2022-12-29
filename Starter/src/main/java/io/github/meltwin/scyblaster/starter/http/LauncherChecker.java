@@ -1,7 +1,11 @@
 package io.github.meltwin.scyblaster.starter.http;
 
 
-import io.github.meltwin.scyblaster.commons.io.JSONFile;
+import io.github.meltwin.scyblaster.commons.Pair;
+import io.github.meltwin.scyblaster.commons.io.file.FileType;
+import io.github.meltwin.scyblaster.commons.io.file.ProjectFileHandler;
+import io.github.meltwin.scyblaster.commons.io.file.ProjectFileUser;
+import io.github.meltwin.scyblaster.commons.io.json.JSONFile;
 import io.github.meltwin.scyblaster.commons.io.file.FileUtils;
 import io.github.meltwin.scyblaster.commons.io.http.HTTPJSONFile;
 import io.github.meltwin.scyblaster.starter.event.TextEvent;
@@ -25,10 +29,17 @@ import java.util.jar.Manifest;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public class LauncherChecker {
+public class LauncherChecker implements ProjectFileUser {
     private final Logger logger = LogManager.getRootLogger();
+
+    static final String CONFIG_FILE = "config.json";
+
     public LauncherChecker() {
-        this.checkCustomFiles();
+        registerFiles();
+    }
+    private void registerFiles() {
+        files.add(new Pair<>(FileType.RESOURCE, CONFIG_FILE));
+        files.add(new Pair<>(FileType.JAR, "launcher.jar"));
     }
 
     /*
@@ -37,7 +48,6 @@ public class LauncherChecker {
         =========================
      */
     static final String USE_DIR = "Using user directory %s";
-    static final String MSG_CHECKING = "Check Sync configuration files.";
     static final String CHECKING_LATEST = "Checking for launcher update ...";
     static final String MSG_NO_LOCAL_JAR = "No local jar found.";
     static final String MSG_CANT_OPEN_JAR = "Can't open local launcher.jar.";
@@ -49,36 +59,27 @@ public class LauncherChecker {
 
     /*
         =========================
-                 Configs
+               Task Method
         =========================
      */
-    static final String CUSTOM_CONFIG = "custom/config.json";
-    static final String DEFAULT_CONFIG = "default/config.json";
-
-    // Checking
-    boolean CUSTOM = true;
-    void checkCustomFiles() {
-        logger.info(MSG_CHECKING);
-        URL custom_conf = getClass().getClassLoader().getResource(CUSTOM_CONFIG);
-        CUSTOM = (custom_conf != null);
-    }
-
-    SyncConfig SYNC_CONF = null;
-    void loadConfigs() {
-        JSONFile conf_file = new JSONFile((CUSTOM) ? CUSTOM_CONFIG : DEFAULT_CONFIG);
-        SYNC_CONF = new SyncConfig(conf_file, SyncConfig.SYNC_INDEX);
+    public void run(@NotNull final ProjectFileHandler handler) {
+        logger.info(String.format(USE_DIR, FileUtils.getUserDir()));
+        this.loadConfigs(handler);
+        this.checkLatest();
     }
 
     /*
         =========================
-               Task Method
+                 Configs
         =========================
      */
-    public void run() {
-        logger.info(String.format(USE_DIR, FileUtils.USER_DIR));
-        this.loadConfigs();
-        this.checkLatest();
+    SyncConfig SYNC_CONF = null;
+    void loadConfigs(@NotNull final ProjectFileHandler handler) {
+        JSONFile conf_file = new JSONFile(handler.getFile(FileType.RESOURCE, CONFIG_FILE));
+        SYNC_CONF = new SyncConfig(conf_file, SyncConfig.SYNC_INDEX);
     }
+
+
 
     /*
         =========================
@@ -111,7 +112,7 @@ public class LauncherChecker {
     static final String NO_VERSION = "0.0.0";
     String getLocalLauncherVersion() {
         // Check if file exist
-        File f = new File(Strings.concat(FileUtils.USER_DIR, LAUNCHER_FILE));
+        File f = new File(Strings.concat(FileUtils.getUserDir(), LAUNCHER_FILE));
         if (!f.exists()) {
             logger.info(MSG_NO_LOCAL_JAR);
             return NO_VERSION;
@@ -120,7 +121,7 @@ public class LauncherChecker {
         // If file exist, read his version from his manifest
         String version = "";
         try {
-            JarFile l_jar = new JarFile(Strings.concat(FileUtils.USER_DIR, LAUNCHER_FILE));
+            JarFile l_jar = new JarFile(Strings.concat(FileUtils.getUserDir(), LAUNCHER_FILE));
             Manifest mf = l_jar.getManifest();
             version = mf.getMainAttributes().getValue("Version");
             version = (version == null) ? NO_VERSION : version;
@@ -147,8 +148,8 @@ public class LauncherChecker {
     }
     void downloadLauncher() {
         logger.info(MSG_DOWNLOADING_LAUNCHER);
-        File new_file = new File(Strings.concat(FileUtils.USER_DIR, LAUNCHER_FILE));
-        File old_file = new File(Strings.concat(FileUtils.USER_DIR, LAUNCHER_OLD_FILE));
+        File new_file = new File(Strings.concat(FileUtils.getUserDir(), LAUNCHER_FILE));
+        File old_file = new File(Strings.concat(FileUtils.getUserDir(), LAUNCHER_OLD_FILE));
         try {
             URL url = new URL(latest_launcher.getString("file"));
             ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
@@ -157,7 +158,7 @@ public class LauncherChecker {
                 new_file.renameTo(old_file);
             createFile(new_file);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(Strings.concat(FileUtils.USER_DIR,LAUNCHER_FILE));
+            FileOutputStream fileOutputStream = new FileOutputStream(Strings.concat(FileUtils.getUserDir(),LAUNCHER_FILE));
             fileOutputStream.getChannel()
                     .transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
             fileOutputStream.close();

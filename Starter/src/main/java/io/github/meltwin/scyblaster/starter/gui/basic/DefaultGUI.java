@@ -1,9 +1,8 @@
 package io.github.meltwin.scyblaster.starter.gui.basic;
 
 import io.github.meltwin.scyblaster.commons.gui.BaseGUI;
-import io.github.meltwin.scyblaster.commons.io.ResourceIMG;
+import io.github.meltwin.scyblaster.commons.io.json.ResourceIMG;
 
-import io.github.meltwin.scyblaster.starter.Starter;
 import io.github.meltwin.scyblaster.starter.event.ProgressBarMaxEvent;
 import io.github.meltwin.scyblaster.starter.event.ProgressBarValueEvent;
 import io.github.meltwin.scyblaster.starter.event.TextEvent;
@@ -12,6 +11,8 @@ import io.github.meltwin.scyblaster.starter.gui.components.LogText;
 import io.github.meltwin.scyblaster.starter.gui.components.ProgressBar;
 import io.github.meltwin.scyblaster.starter.gui.components.config.LogTextConfig;
 import io.github.meltwin.scyblaster.starter.gui.components.config.ProgressBarConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -26,6 +27,8 @@ import java.io.IOException;
  * @since 0.1-SNAPSHOT
  */
 public class DefaultGUI extends BaseGUI<DefaultGUIConfig> implements GUIEventListener {
+
+    protected final Logger logger = LogManager.getRootLogger();
 
     protected final JLayeredPane panel;
     protected final JLabel background;
@@ -95,11 +98,11 @@ public class DefaultGUI extends BaseGUI<DefaultGUIConfig> implements GUIEventLis
         try {
             img = ResourceIMG.getResourceIMG(filepath);
         } catch (IOException e) {
-            Starter.log.warn("Error during custom background image loading !");
+            logger.warn("Error during custom background image loading !");
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
             // If problem during custom load, load default background
-            Starter.log.warn("The background image path in custom/GUI_config.json doesn't exit !\n\tLoading default background...");
+            logger.warn("The background image path in custom/GUI_config.json doesn't exit !\n\tLoading default background...");
             img = getBackgroundIMG(config.getBackground());
         }
 

@@ -1,4 +1,4 @@
-package io.github.meltwin.scyblaster.commons.io;
+package io.github.meltwin.scyblaster.commons.io.json;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,8 +1,10 @@
 package io.github.meltwin.scyblaster.starter.gui;
 
+import io.github.meltwin.scyblaster.commons.gui.BaseGUIConfig;
 import io.github.meltwin.scyblaster.commons.gui.GUILoader;
 import io.github.meltwin.scyblaster.starter.gui.basic.DefaultGUI;
 import io.github.meltwin.scyblaster.starter.gui.basic.DefaultGUIConfig;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Loader for Default Starter GUI
@@ -10,15 +12,25 @@ import io.github.meltwin.scyblaster.starter.gui.basic.DefaultGUIConfig;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public final class DefaultGUILoader extends GUILoader {
-
-    private final DefaultGUIConfig DEFAULT_GUI_CONFIG = new DefaultGUIConfig(DEFAULT_GUI_FILE);
+public final class DefaultGUILoader extends GUILoader<DefaultGUIConfig, DefaultGUIConfig> {
 
     @Override
-    protected void makeCustomGUI() {
-        DefaultGUIConfig conf = new DefaultGUIConfig(CUSTOM_GUI_FILE);
-        new DefaultGUI(conf);
+    protected DefaultGUIConfig makeDefaultConfig(@NotNull String file) {
+        return new DefaultGUIConfig(file);
     }
+
     @Override
-    protected void makeDefaultGUI() { new DefaultGUI(DEFAULT_GUI_CONFIG); }
+    protected DefaultGUIConfig makeCustomConfig(@NotNull String file) {
+        return new DefaultGUIConfig(file);
+    }
+
+    @Override
+    protected void makeDefaultGUI(@NotNull DefaultGUIConfig baseGUIConfig) {
+    new DefaultGUI(baseGUIConfig);
+    }
+
+    @Override
+    protected void makeCustomGUI(@NotNull DefaultGUIConfig baseGUIConfig) {
+        new DefaultGUI(baseGUIConfig);
+    }
 }

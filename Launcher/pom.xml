@@ -5,12 +5,12 @@
     <parent>
         <artifactId>scyblaster</artifactId>
         <groupId>io.github.meltwin</groupId>
-        <version>0.1.0</version>
+        <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>scyblaster.launcher</artifactId>
-    <version>0.1.0</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -34,7 +34,7 @@
                 <configuration>
                     <classifier>launcher-full</classifier>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <outputDirectory>${project.parent.basedir}/build</outputDirectory>
+                    <outputDirectory>${output-dir}</outputDirectory>
                     <archive>
                         <manifest>
                             <mainClass>io.github.meltwin.scyblaster.launcher.Launcher</mainClass>

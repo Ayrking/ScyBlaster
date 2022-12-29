@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,10 +23,11 @@ public class HTTPJSONFile extends JSONObject {
 
     final static Logger logger = LogManager.getRootLogger();
     final static String MSG_FILE_GET = "Downloading file %s";
-    final static String MSG_REPONSE_CODE = "Response %d (%s)";
+    final static String MSG_RESPONSE_CODE = "Response %d (%s)";
     final static String MSG_ERROR_FILE_NOT_FOUND = "File not found or not accessible. Please check your server configuration.";
     final static String MSG_ERROR_SERVER = "Server error. Please contact your server administrator.";
     final static String MSG_UNKNOWN_ERROR = "Unknown error. Please contact your server administrator and/or the developer.";
+    final static String MSG_CANT_CONNECT = "Connection exception. Please verify your connection.\nIf problem persist please contact an administrator.";
 
     public HTTPJSONFile(final @NotNull URL file_url) { super(getResponse(file_url)); }
 
@@ -37,7 +39,7 @@ public class HTTPJSONFile extends JSONObject {
             HttpURLConnection con = (HttpURLConnection) file_url.openConnection();
             con.setRequestMethod("GET");
 
-            logger.trace(String.format(MSG_REPONSE_CODE, con.getResponseCode(), con.getResponseMessage()));
+            logger.trace(String.format(MSG_RESPONSE_CODE, con.getResponseCode(), con.getResponseMessage()));
 
             int code = con.getResponseCode();
             // Reading data if request is good
@@ -64,8 +66,9 @@ public class HTTPJSONFile extends JSONObject {
             }
 
             con.disconnect();
-        }
-        catch (IOException e) {
+        } catch (ConnectException e) {
+            logger.fatal(MSG_CANT_CONNECT);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return out;

@@ -1,7 +1,13 @@
 package io.github.meltwin.scyblaster.commons.gui;
 
+import io.github.meltwin.scyblaster.commons.Pair;
+import io.github.meltwin.scyblaster.commons.io.LogUtils;
+import io.github.meltwin.scyblaster.commons.io.file.FileType;
+import io.github.meltwin.scyblaster.commons.io.file.ProjectFileHandler;
+import io.github.meltwin.scyblaster.commons.io.file.ProjectFileUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 
@@ -11,17 +17,15 @@ import java.net.URL;
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */
-public abstract class GUILoader {
+public abstract class GUILoader<BGUIConf extends BaseGUIConfig, CGUIConf extends BaseGUIConfig>
+        implements ProjectFileUser {
     /*
         =========================
                  MEMBERS
         =========================
      */
-    protected boolean CUSTOM = false;
     protected final Logger logger = LogManager.getLogger();
-
-    protected static final String DEFAULT_GUI_FILE = "default/GUI_config.json";
-    protected static final String CUSTOM_GUI_FILE = "custom/GUI_config.json";
+    static final String GUI_CONFIG_FILE = "GUI_config.json";
 
     protected BaseGUI gui;
 
@@ -31,53 +35,57 @@ public abstract class GUILoader {
         =========================
      */
     static final String MSG_STARTING = "Loading GUI !";
-    static final String MSG_CHECKING = "Check GUI configuration files.";
-
     static final String MSG_MAKING_CUSTOM = "Found custom GUI. Proceeding to the loading !";
-    static final String MSG_MAKING_DEFAULT = "Continuing default GUI.";
+    static final String MSG_MAKING_DEFAULT = "Continuing with default GUI.";
 
     /*
         =========================
-                 METHODS
+              Configuration
         =========================
      */
 
     protected GUILoader() {
         logger.info(MSG_STARTING);
-        this.checkCustomFiles();
+        this.saveConfigs();
+    }
+    void saveConfigs() {
+        files.add(new Pair<>(FileType.RESOURCE, GUI_CONFIG_FILE));
     }
 
-    /**
-     * Check for custom configuration files.
+    /*
+        =========================
+                  Making
+        =========================
      */
-    private void checkCustomFiles() {
-        logger.info(MSG_CHECKING);
-        URL custom_conf = getClass().getClassLoader().getResource(CUSTOM_GUI_FILE);
-        CUSTOM = (custom_conf != null);
-    }
-
     /**
      * Start the making of the GUI.
      */
-    public final void makeGUI() {
-        if (CUSTOM) {
+    public final void make(final @NotNull ProjectFileHandler handler) {
+        LogUtils.logTitle("GUI Making");
+        if (handler.exist(GUI_CONFIG_FILE)) {
             logger.info(MSG_MAKING_CUSTOM);
-            this.makeCustomGUI();
+            CGUIConf conf = makeCustomConfig(handler.getFile(FileType.RESOURCE, GUI_CONFIG_FILE));
+            logger.info(conf);
+            this.makeCustomGUI(conf);
         }
         else {
             logger.info(MSG_MAKING_DEFAULT);
-            this.makeDefaultGUI();
+            BGUIConf conf = makeDefaultConfig(handler.getFile(FileType.RESOURCE, GUI_CONFIG_FILE));
+            logger.info(conf);
+            this.makeDefaultGUI(conf);
         }
     }
+
+    protected abstract BGUIConf makeDefaultConfig(@NotNull final String file);
+    protected abstract CGUIConf makeCustomConfig(@NotNull final String file);
 
     /**
      * Launch the making of the custom GUI.
      */
-    protected abstract void makeDefaultGUI();
-
+    protected abstract void makeDefaultGUI(@NotNull final BGUIConf conf);
     /**
      * Launch the making of the default GUI.
      */
-    protected abstract void makeCustomGUI();
+    protected abstract void makeCustomGUI(@NotNull final CGUIConf conf);
 
 }

@@ -2,6 +2,7 @@ package io.github.meltwin.scyblaster.commons;
 
 /**
  * Container to contain two different elements
+ * @Copyright: GNU APGLv3 - (C) 2022 Meltwin
  * @author Meltwin
  * @since 0.1-SNAPSHOT
  */

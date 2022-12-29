@@ -7,7 +7,15 @@
     <groupId>io.github.meltwin</groupId>
     <artifactId>scyblaster</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0</version>
+    <version>0.0.1</version>
+
+    <licenses>
+        <license>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE v3</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <!-- Module division -->
     <modules>
@@ -33,12 +41,27 @@
             <artifactId>log4j-core</artifactId>
             <version>2.19.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220320</version>
+        </dependency>
     </dependencies>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--suppress UnresolvedMavenProperty -->
+        <output-dir>${project.parent.basedir}/build</output-dir>
     </properties>
 
+    <!-- GitHub Package Export -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Ayrking/ScyBlaster-Core</url>
+        </repository>
+    </distributionManagement>
 </project>

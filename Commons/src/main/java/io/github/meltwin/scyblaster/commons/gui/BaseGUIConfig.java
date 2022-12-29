@@ -1,7 +1,7 @@
 package io.github.meltwin.scyblaster.commons.gui;
 
 
-import io.github.meltwin.scyblaster.commons.io.JSONFile;
+import io.github.meltwin.scyblaster.commons.io.json.JSONFile;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -31,9 +31,14 @@ public class BaseGUIConfig extends JSONFile {
      *           Credits
      *  #########################
      */
-    public final JSONObject credits() { return this.getJSONObject("credits"); }
+    JSONObject credits() { return this.getJSONObject("credits"); }
     public final String GUIName() { return credits().getString("name"); }
     public final String GUIAuthor() { return credits().getString("author"); }
     public final int GUIDate() { return credits().getInt("date"); }
     public final String GUIVersion() { return credits().getString("version"); }
+
+    @Override
+    public final String toString() {
+        return String.format("GUI %s (v%s) by %s (%d)", GUIName(), GUIVersion(), GUIAuthor(), GUIDate());
+    }
 }
