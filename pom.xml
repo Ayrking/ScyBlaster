@@ -17,13 +17,6 @@
         </license>
     </licenses>
 
-    <!-- Module division -->
-    <modules>
-        <module>Commons</module>
-        <module>Starter</module>
-        <module>Launcher</module>
-    </modules>
-
     <!-- Dependencies for the whole project -->
     <dependencies>
         <dependency>
@@ -56,12 +49,4 @@
         <!--suppress UnresolvedMavenProperty -->
         <output-dir>${project.parent.basedir}/build</output-dir>
     </properties>
-
-    <!-- GitHub Package Export -->
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Ayrking/ScyBlaster-Core</url>
-        </repository>
-    </distributionManagement>
 </project>

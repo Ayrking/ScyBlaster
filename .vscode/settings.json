@@ -1,0 +1,25 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".idea": true,
+        ".vscode": true,
+        "build": true,
+        "Commons/target": true,
+        "Starter/target": true,
+        "Launcher/target": true
+    },
+    "hide-files.files": [
+        ".idea",
+        ".vscode",
+        "build",
+        "Commons/target",
+        "Starter/target",
+        "Launcher/target"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
