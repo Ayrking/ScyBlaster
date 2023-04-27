@@ -149,3 +149,4 @@ local.properties
 # Local History for Visual Studio Code
 .history/
 build/
+**/test

@@ -8,18 +8,12 @@
         "**/Thumbs.db": true,
         ".idea": true,
         ".vscode": true,
-        "build": true,
-        "Commons/target": true,
-        "Starter/target": true,
-        "Launcher/target": true
+        "common/target": true
     },
     "hide-files.files": [
         ".idea",
         ".vscode",
-        "build",
-        "Commons/target",
-        "Starter/target",
-        "Launcher/target"
+        "common/target"
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

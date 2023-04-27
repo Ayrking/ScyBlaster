@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>io.github.meltwin</groupId>
+    <groupId>io.meltwin</groupId>
     <artifactId>scyblaster</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 
     <licenses>
         <license>
@@ -17,6 +16,10 @@
         </license>
     </licenses>
 
+    <modules>
+        <module>common</module>
+    </modules>
+
     <!-- Dependencies for the whole project -->
     <dependencies>
         <dependency>
@@ -24,29 +27,40 @@
             <artifactId>annotations</artifactId>
             <version>23.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.19.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.19.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>     <!-- NOT org.junit here -->
+            <artifactId>junit-dep</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!--suppress UnresolvedMavenProperty -->
+        <!--suppress
+        UnresolvedMavenProperty -->
         <output-dir>${project.parent.basedir}/build</output-dir>
     </properties>
 </project>
