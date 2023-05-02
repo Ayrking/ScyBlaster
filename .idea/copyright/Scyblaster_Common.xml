@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Copyright (c) Meltwin &amp;#36;originalComment.match(&quot;Copyright \(c\) (\d+)&quot;, 1, &quot;-&quot;, &quot;&amp;#36;today.year&quot;)&amp;#36;today.year.&#10;&#10;Scyblaster Common is a library providing utils for MC Launcher making. &#10;&#10;Source: https://github.com/Meltwin/ScyBlaster&#10;Distributed under the GNU Affero General Public License v3.0" />
+    <option name="myName" value="Scyblaster Common" />
+  </copyright>
+</component>
