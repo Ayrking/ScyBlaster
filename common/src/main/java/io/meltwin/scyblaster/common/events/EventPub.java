@@ -9,6 +9,7 @@
 
 package io.meltwin.scyblaster.common.events;
 
+import io.meltwin.scyblaster.common.SBCommon;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.SoftReference;
@@ -24,6 +25,7 @@ public interface EventPub {
      * @param event the event to send
      */
     default void publish(@NotNull EventChannel channel, @NotNull Event event) {
-        EventRouter.sendEvent(channel, new SoftReference<Event>(event));
+        SBCommon.LOGGER.debug(String.format("Publishing message on channel %s", channel.get_name()));
+        EventRouter.sendEvent(channel, new SoftReference<>(event));
     }
 }

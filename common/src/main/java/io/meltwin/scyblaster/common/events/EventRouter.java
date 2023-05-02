@@ -9,6 +9,8 @@
 
 package io.meltwin.scyblaster.common.events;
 
+import io.meltwin.scyblaster.common.SBCommon;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.SoftReference;
@@ -18,9 +20,10 @@ import java.util.HashMap;
 /**
  *  Event Router for the whole app
  */
-public class EventRouter {
+public final class EventRouter {
 
     private static final HashMap<EventChannel, ArrayList<_EventSub>> PUB_MAP = new HashMap<>();
+    private static final Logger LOGGER = SBCommon.LOGGER;
 
     /*  ==============================================================
                                 Static Interface
@@ -31,8 +34,11 @@ public class EventRouter {
      * @param channel the channel to register
      */
     public static void registerChannel(@NotNull EventChannel channel) {
-        if (!PUB_MAP.containsKey(channel))
-            PUB_MAP.put(channel, new ArrayList<_EventSub>());
+        if (!PUB_MAP.containsKey(channel)) {
+            LOGGER.debug(String.format("Registering event channel %s", channel.get_name()));
+            PUB_MAP.put(channel, new ArrayList<>());
+        }
+        LOGGER.debug(String.format("Event channel %s already exist !", channel.get_name()));
     }
 
     /**
@@ -44,6 +50,7 @@ public class EventRouter {
         registerChannel(channel);
 
         PUB_MAP.get(channel).add(sub);
+        LOGGER.debug(String.format("Registering subscriber for channel %s", channel.get_name()));
     }
 
     /**
@@ -52,10 +59,13 @@ public class EventRouter {
      * @param event the event to send
      */
     public static void sendEvent(@NotNull EventChannel channel, @NotNull SoftReference<Event> event) {
-        if (!PUB_MAP.containsKey(channel))
+        if (!PUB_MAP.containsKey(channel)) {
+            LOGGER.warn(String.format("Received message on an unregistered channel (%s)", channel.get_name()));
             return;
+        }
 
         // Send event to all subscribers
+        LOGGER.debug(String.format("Broadcasting received event on channel %s", channel.get_name()));
         for(_EventSub sub: PUB_MAP.get(channel))
             sub.receive_msg(channel, event);
     }
