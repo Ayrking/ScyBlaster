@@ -22,6 +22,8 @@ import java.util.HashMap;
  */
 public final class EventRouter {
 
+    private EventRouter() {}
+
     private static final HashMap<EventChannel, ArrayList<_EventSub>> PUB_MAP = new HashMap<>();
     private static final Logger LOGGER = SBCommon.LOGGER;
 
