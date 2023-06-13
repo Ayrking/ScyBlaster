@@ -13,7 +13,6 @@ import io.meltwin.scyblaster.common.io.resource.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -30,13 +29,19 @@ abstract class MultiThreadedResourceHandler extends ResourceHandler {
 
     protected Logger LOGGER = LogManager.getLogger("SBCom ResHand");
 
-    protected MultiThreadedResourceHandler() { super(); }
+    protected MultiThreadedResourceHandler() {
+        super();
+    }
 
     @Override
-    public void prepare_resource(@NotNull Resource res) { TO_PROC.add(res); }
+    public void prepare_resource(@NotNull Resource res) {
+        TO_PROC.add(res);
+    }
 
     @Override
-    public CompletableFuture<Boolean> launch_preparation() { return CompletableFuture.supplyAsync(this::runAll); }
+    public CompletableFuture<Boolean> launch_preparation() {
+        return CompletableFuture.supplyAsync(this::runAll);
+    }
 
     protected boolean runAll() {
         LOGGER.trace(String.format("Running download of %d files", TO_PROC.size()));
@@ -55,8 +60,7 @@ abstract class MultiThreadedResourceHandler extends ResourceHandler {
                 if (tasks[i] != null) {
                     if (tasks[i].isDone() || tasks[i].isCancelled()) {
                         tasks[i] = null;
-                    }
-                    else {
+                    } else {
                         task_still_running = true;
                     }
                 }
@@ -67,7 +71,8 @@ abstract class MultiThreadedResourceHandler extends ResourceHandler {
                     tasks[i] = executorService.submit(() -> {
                         Resource res = TO_PROC.poll();
                         if (res != null) {
-                            LOGGER.trace(String.format("Preparing file #%1d [%2d] - %s", n_done.getAndIncrement(), idx_task, res.get_resource_path()));
+                            LOGGER.trace(String.format("Preparing file #%1d [%2d] - %s", n_done.getAndIncrement(),
+                                    idx_task, res.get_resource_path()));
                             runRes(res);
                         }
                     });

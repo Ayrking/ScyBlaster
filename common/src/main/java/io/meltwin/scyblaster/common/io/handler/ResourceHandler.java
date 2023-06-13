@@ -18,8 +18,10 @@ import java.util.concurrent.CompletableFuture;
  * Handle resource of a certain type
  */
 abstract public class ResourceHandler {
-    protected ResourceHandler() {}
+    protected ResourceHandler() {
+    }
 
     abstract public void prepare_resource(@NotNull Resource res);
+
     abstract public CompletableFuture<Boolean> launch_preparation();
 }

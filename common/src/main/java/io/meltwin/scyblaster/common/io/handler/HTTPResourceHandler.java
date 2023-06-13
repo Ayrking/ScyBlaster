@@ -29,6 +29,7 @@ public class HTTPResourceHandler extends MultiThreadedResourceHandler {
 
     /**
      * Download a file with HTTP
+     * 
      * @param res the resource to download
      */
     protected void runRes(@Nullable Resource res) {
@@ -41,8 +42,7 @@ public class HTTPResourceHandler extends MultiThreadedResourceHandler {
             FileUtils.copyURLToFile(url, fileLocation);
             if (fileLocation.exists()) {
                 res.set_status(ResourceStatus.READY);
-            }
-            else {
+            } else {
                 LOGGER.error(String.format("File could not be saved locally (%s)", res.get_resource_path()));
                 res.set_status(ResourceStatus.ERROR);
             }
