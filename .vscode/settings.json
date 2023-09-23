@@ -7,13 +7,16 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         ".idea": true,
-        ".vscode": true,
-        "common/target": true
+        "common/target": true,
+        ".vscode": true
     },
     "hide-files.files": [
         ".idea",
-        ".vscode",
-        "common/target"
+        "common/target",
+        ".vscode"
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.sourcePaths": [
+        ""
+    ]
 }
