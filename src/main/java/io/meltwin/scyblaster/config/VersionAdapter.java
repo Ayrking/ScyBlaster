@@ -9,8 +9,8 @@ public class VersionAdapter extends XmlAdapter<String, Pair<Integer, Integer>> {
 
     @Override
     public String marshal(Pair<Integer, Integer> v) throws Exception {
-        return String.format("%s|%s", MCVersions.versionList.versions[v.a].id,
-                MCVersions.versionList.versions[v.b].id);
+        return String.format("%s|%s", MCVersions.getVersion(v.a),
+                MCVersions.getVersion(v.b));
     }
 
     @Override

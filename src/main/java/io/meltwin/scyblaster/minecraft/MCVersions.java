@@ -3,12 +3,12 @@ package io.meltwin.scyblaster.minecraft;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.Gson;
 
@@ -20,13 +20,13 @@ import io.meltwin.scyblaster.files.ResourceStatus;
 public class MCVersions {
 
     private static final Logger logger = LogManager.getLogger("MCVersions");
-    public static MCVersionsList versionList;
+    private static MCVersionsList versionList;
 
     private MCVersions() {
     }
 
     public static boolean fetch() {
-        logger.info("Retrieving Minecraft versions from distant.");
+        logger.info("Retrieving Minecraft versions list from distant.");
         try {
             Path tempFile = Files.createTempFile(null, ".json");
             Future<ResourceFile> versionFuture = ResourceHandler.prepareFile(new ResourceFile(
@@ -60,5 +60,27 @@ public class MCVersions {
         }
         logger.error(String.format("Could not find any version corresponding to %s. Using latest version.", version));
         return 0;
+    }
+
+    public static String getVersion(int id) {
+        if (id < versionList.versions.length)
+            return versionList.versions[id].id;
+        return "None";
+    }
+
+    public static int getVersionsNumber() {
+        return versionList.versions.length;
+    }
+
+    public static @NotNull String getDistVersionFile(int versionID) {
+        if (versionID < versionList.versions.length)
+            return versionList.versions[versionID].url;
+        return "";
+    }
+
+    public static @NotNull String getVersionSHA1(int versionID) {
+        if (versionID < versionList.versions.length)
+            return versionList.versions[versionID].sha1;
+        return "";
     }
 }
