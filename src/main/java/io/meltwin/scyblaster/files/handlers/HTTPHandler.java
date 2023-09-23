@@ -36,7 +36,7 @@ public class HTTPHandler implements IBaseHandler {
                 // Check if downloaded
                 if (fileLocation.exists()) {
                     file.status = ResourceStatus.READY;
-                    logger.error(String.format("File could not be saved locally (%s)", file.distPath));
+                    logger.debug(String.format("Downloaded file %s -> %s", file.distPath, file.localPath));
                 } else {
                     logger.error(String.format("File could not be saved locally (%s)", file.distPath));
                     file.status = ResourceStatus.ERROR;

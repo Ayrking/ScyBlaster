@@ -52,7 +52,7 @@ public class ResourceHandler {
     private ExecutorService executor = Executors.newFixedThreadPool(3);
     private EnumMap<FileType, IBaseHandler> handlers;
 
-    public Future<ResourceFile> internalPreparation(@NotNull ResourceFile file) {
+    private Future<ResourceFile> internalPreparation(@NotNull ResourceFile file) {
         return handlers.get(file.type).getFile(file);
     }
 

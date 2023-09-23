@@ -8,9 +8,10 @@ import org.jetbrains.annotations.NotNull;
 @XmlRootElement(name = "project")
 public class Configs {
 
-    private ResourceConfig resources;
+    private ResourceConfig resources = new ResourceConfig();
+    private Minecraft minecraft = new Minecraft();
 
-    @XmlElement(name = "resources")
+    @XmlElement(name = "resources", required = true)
     public void setResourcesConfig(ResourceConfig config) {
         this.resources = config;
     }
@@ -18,5 +19,15 @@ public class Configs {
     @NotNull
     public ResourceConfig getResourceConfig() {
         return resources;
+    }
+
+    @XmlElement(name = "minecraft", required = true)
+    public void setMinecraftConfig(Minecraft mc) {
+        this.minecraft = mc;
+    }
+
+    @NotNull
+    public Minecraft getMinecraftConfigs() {
+        return this.minecraft;
     }
 }

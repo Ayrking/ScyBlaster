@@ -2,4 +2,6 @@
 <project>
     <resources base-dir=".scyblaster">
     </resources>
+    <minecraft type="single" version="1.16.2">
+    </minecraft>
 </project>

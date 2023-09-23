@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class ResourceConfig {
     private String baseDir = "";
 
-    @XmlAttribute(name = "base-dir")
+    @XmlAttribute(name = "base-dir", required = true)
     public void setBaseDir(String path) {
         this.baseDir = path;
     }
