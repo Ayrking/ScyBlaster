@@ -8,17 +8,22 @@ import org.jetbrains.annotations.NotNull;
 import io.meltwin.scyblaster.common.Pair;
 
 public class Minecraft {
-    @XmlAttribute(name = "type", required = true)
+
     private VersionType type = VersionType.SINGLE;
 
-    @XmlAttribute(name = "version")
-    @XmlJavaTypeAdapter(VersionAdapter.class)
-    private Pair<Integer, Integer> versions = new Pair<>(0, 0);
+    @XmlAttribute(name = "type", required = true)
+    public void setType(String type) {
+        this.type = VersionType.fromValue(type);
+    }
 
     @NotNull
     public VersionType getType() {
         return type;
     }
+
+    @XmlAttribute(name = "version")
+    @XmlJavaTypeAdapter(VersionAdapter.class)
+    private Pair<Integer, Integer> versions = new Pair<>(0, 0);
 
     @NotNull
     public Pair<Integer, Integer> getVersion() {
