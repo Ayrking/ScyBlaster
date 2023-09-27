@@ -7,8 +7,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import org.jetbrains.annotations.NotNull;
 
+import io.meltwin.scyblaster.Launcher;
 import io.meltwin.scyblaster.common.FutureCluster;
+import io.meltwin.scyblaster.common.OSInfos;
 import io.meltwin.scyblaster.files.handlers.IBaseHandler;
+import io.meltwin.scyblaster.files.types.FileType;
+import io.meltwin.scyblaster.files.types.ResourceFile;
 import io.meltwin.scyblaster.files.handlers.HTTPHandler;
 
 /**
@@ -46,7 +50,7 @@ public class ResourceHandler {
 
     /*
      * ########################################
-     * File Preparationg
+     * File Preparation
      * ########################################
      */
     private ExecutorService executor = Executors.newFixedThreadPool(3);
@@ -72,10 +76,45 @@ public class ResourceHandler {
      * @param files a list to the files to prepare
      * @return a list of futures to wait for completion
      */
-    public static FutureCluster<ResourceFile> prepareFiles(@NotNull List<@NotNull ResourceFile> files) {
+    public static FutureCluster<ResourceFile> prepareFiles(
+            @NotNull List<io.meltwin.scyblaster.files.types.ResourceFile> files) {
         FutureCluster<ResourceFile> out = new FutureCluster<>();
         for (ResourceFile file : files)
             out.add(instance().internalPreparation(file));
         return out;
+    }
+
+    /*
+     * ########################################
+     * Path utils
+     * ########################################
+     */
+    /**
+     * @return The path to the apps data directory
+     */
+    public static String getAppDataDir() {
+        if (OSInfos.IS_WINDOWS) {
+            return System.getenv("AppData");
+        }
+        if (OSInfos.IS_UNIX) {
+            return System.getProperty("user.home");
+        }
+        if (OSInfos.IS_MAC) {
+            return System.getProperty("user.home") + "/Library/Application Support";
+        }
+        return "";
+    }
+
+    public static String getBaseDir() {
+        return getAppDataDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getBaseDir();
+    }
+
+    public static String getAssetsDir() {
+        return getBaseDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getAssetsDir()
+                + OSInfos.SEPARATOR;
+    }
+
+    public static String getLibsDir() {
+        return getBaseDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getLibsDir() + OSInfos.SEPARATOR;
     }
 }

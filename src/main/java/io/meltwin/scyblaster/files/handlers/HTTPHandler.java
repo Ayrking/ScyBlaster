@@ -11,8 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.meltwin.scyblaster.files.ResourceFile;
-import io.meltwin.scyblaster.files.ResourceStatus;
+import io.meltwin.scyblaster.files.types.ResourceFile;
+import io.meltwin.scyblaster.files.types.ResourceStatus;
 
 public class HTTPHandler implements IBaseHandler {
 
@@ -36,7 +36,7 @@ public class HTTPHandler implements IBaseHandler {
                 // Check if downloaded
                 if (fileLocation.exists()) {
                     file.status = ResourceStatus.READY;
-                    logger.debug(String.format("Downloaded file %s -> %s", file.distPath, file.localPath));
+                    logger.trace(String.format("Downloaded file %s -> %s", file.distPath, file.localPath));
                 } else {
                     logger.error(String.format("File could not be saved locally (%s)", file.distPath));
                     file.status = ResourceStatus.ERROR;

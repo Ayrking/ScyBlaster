@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.jetbrains.annotations.NotNull;
 
+import io.meltwin.scyblaster.config.dto.Minecraft;
+import io.meltwin.scyblaster.config.dto.ResourceConfig;
+
 @XmlRootElement(name = "project")
 public class Configs {
 

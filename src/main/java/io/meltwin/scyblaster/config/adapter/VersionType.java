@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.adapter;
 
 public enum VersionType {
     SINGLE,

@@ -6,6 +6,6 @@
 package io.meltwin.scyblaster.minecraft.dto.version;
 
 public class Library {
-    public DownloadDesc download;
+    public DownloadDesc downloads;
     public Rule[] rules;
 }

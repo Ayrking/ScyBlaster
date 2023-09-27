@@ -12,10 +12,11 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.Gson;
 
-import io.meltwin.scyblaster.files.FileType;
-import io.meltwin.scyblaster.files.ResourceFile;
 import io.meltwin.scyblaster.files.ResourceHandler;
-import io.meltwin.scyblaster.files.ResourceStatus;
+import io.meltwin.scyblaster.files.types.FileType;
+import io.meltwin.scyblaster.files.types.ResourceFile;
+import io.meltwin.scyblaster.files.types.ResourceStatus;
+import io.meltwin.scyblaster.minecraft.dto.versionList.MCVersionsList;
 
 public class MCVersions {
 

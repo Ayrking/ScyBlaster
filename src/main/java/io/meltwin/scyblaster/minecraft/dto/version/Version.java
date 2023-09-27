@@ -8,7 +8,7 @@ package io.meltwin.scyblaster.minecraft.dto.version;
 public class Version {
     public MCArguments arguments;
     public AssetIndex assetIndex;
-    public int assets;
+    public String assets;
     public int complianceLevel;
     public Downloads downloads;
     public String id;

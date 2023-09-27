@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.files;
+package io.meltwin.scyblaster.files.types;
 
 public enum ResourceStatus {
     WAITING,

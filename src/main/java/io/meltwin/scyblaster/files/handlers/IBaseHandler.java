@@ -6,7 +6,7 @@ import java.util.concurrent.Future;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import io.meltwin.scyblaster.files.ResourceFile;
+import io.meltwin.scyblaster.files.types.ResourceFile;
 
 public interface IBaseHandler {
 

@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.dto;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import io.meltwin.scyblaster.common.Pair;
+import io.meltwin.scyblaster.config.adapter.VersionAdapter;
+import io.meltwin.scyblaster.config.adapter.VersionType;
 
 public class Minecraft {
 
@@ -21,9 +23,13 @@ public class Minecraft {
         return type;
     }
 
+    private Pair<Integer, Integer> versions = new Pair<>(0, 0);
+
     @XmlAttribute(name = "version")
     @XmlJavaTypeAdapter(VersionAdapter.class)
-    private Pair<Integer, Integer> versions = new Pair<>(0, 0);
+    public void setVersions(Pair<Integer, Integer> versions) {
+        this.versions = versions;
+    }
 
     @NotNull
     public Pair<Integer, Integer> getVersion() {

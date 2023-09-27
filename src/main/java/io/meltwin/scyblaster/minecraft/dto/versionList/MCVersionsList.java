@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.minecraft;
+package io.meltwin.scyblaster.minecraft.dto.versionList;
 
 public class MCVersionsList {
     public class VersionItem {
