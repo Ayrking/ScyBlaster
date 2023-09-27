@@ -9,6 +9,7 @@ public class ResourceConfig {
     private String baseDir = ".scyblaster";
     private String assetsDir = "assets";
     private String libDir = "lib";
+    private String versionsDir = "versions";
 
     @XmlAttribute(name = "base-dir", required = true)
     public void setBaseDir(String path) {
@@ -38,5 +39,15 @@ public class ResourceConfig {
     @NotNull
     public String getLibsDir() {
         return this.libDir;
+    }
+
+    @XmlElement(name = "versions", required = true)
+    public void setVersionsDir(String path) {
+        this.versionsDir = path;
+    }
+
+    @NotNull
+    public String getVersionsDir() {
+        return this.versionsDir;
     }
 }

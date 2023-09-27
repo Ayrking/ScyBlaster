@@ -105,16 +105,33 @@ public class ResourceHandler {
         return "";
     }
 
+    /**
+     * @return the path to the root directory for the launcher
+     */
     public static String getBaseDir() {
         return getAppDataDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getBaseDir();
     }
 
+    /**
+     * @return the path to the assets directory
+     */
     public static String getAssetsDir() {
         return getBaseDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getAssetsDir()
                 + OSInfos.SEPARATOR;
     }
 
+    /**
+     * @return the path to the libs directory
+     */
     public static String getLibsDir() {
         return getBaseDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getLibsDir() + OSInfos.SEPARATOR;
+    }
+
+    /**
+     * @return the path to the libs directory
+     */
+    public static String getVersionsDir() {
+        return getBaseDir() + OSInfos.SEPARATOR + Launcher.configs.getResourceConfig().getVersionsDir()
+                + OSInfos.SEPARATOR;
     }
 }

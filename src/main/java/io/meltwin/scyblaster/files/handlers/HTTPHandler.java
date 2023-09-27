@@ -27,6 +27,18 @@ public class HTTPHandler implements IBaseHandler {
     public @NotNull Future<ResourceFile> getFile(@NotNull ResourceFile file) {
         return executor.submit(() -> {
             try {
+                // If missing file informations => Error
+                if (file.distPath == null || file.localPath == null) {
+                    file.status = ResourceStatus.ERROR;
+                    return file;
+                }
+
+                // Check if is there locally
+                if (isSameLocally(file)) {
+                    file.status = ResourceStatus.READY;
+                    return file;
+                }
+
                 // Downloads it
                 file.status = ResourceStatus.RUNNING;
                 URL url = new URL(file.distPath);
@@ -52,6 +64,11 @@ public class HTTPHandler implements IBaseHandler {
     @Override
     public @Nullable ExecutorService getExecutor() {
         return executor;
+    }
+
+    @Override
+    public @NotNull Logger getLogger() {
+        return logger;
     }
 
 }

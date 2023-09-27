@@ -63,7 +63,7 @@ public class Launcher {
         logger.debug(String.format("Minecraft target: %s ", MCVersions.getVersion(mcVersionID)));
 
         AssetsManager manager = new AssetsManager(mcVersionID);
-        if (manager.errored) {
+        if (manager.isErrored()) {
             System.exit(-1);
         }
         Version version = manager.getMetaData();

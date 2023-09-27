@@ -30,10 +30,9 @@ public class MCVersions {
         logger.info("Retrieving Minecraft versions list from distant.");
         try {
             Path tempFile = Files.createTempFile(null, ".json");
-            Future<ResourceFile> versionFuture = ResourceHandler.prepareFile(new ResourceFile(
+            ResourceFile mcVersions = ResourceHandler.prepareFile(new ResourceFile(
                     "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
-                    FileType.HTTP, tempFile.toString()));
-            ResourceFile mcVersions = versionFuture.get();
+                    FileType.HTTP, tempFile.toString(), true)).get();
 
             // If we couldn't retrieve the versions
             if (mcVersions.status == ResourceStatus.ERROR) {
