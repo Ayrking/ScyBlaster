@@ -2,7 +2,6 @@ package io.meltwin.scyblaster.minecraft;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,10 @@ import com.google.gson.JsonSyntaxException;
 
 import io.meltwin.scyblaster.common.FutureCluster;
 import io.meltwin.scyblaster.common.OSInfos;
-import io.meltwin.scyblaster.files.ResourceHandler;
-import io.meltwin.scyblaster.files.types.FileType;
-import io.meltwin.scyblaster.files.types.ResourceFile;
-import io.meltwin.scyblaster.files.types.ResourceStatus;
+import io.meltwin.scyblaster.common.files.ResourceHandler;
+import io.meltwin.scyblaster.common.files.types.FileType;
+import io.meltwin.scyblaster.common.files.types.ResourceFile;
+import io.meltwin.scyblaster.common.files.types.ResourceStatus;
 import io.meltwin.scyblaster.minecraft.adapter.ArgumentAdapter;
 import io.meltwin.scyblaster.minecraft.adapter.RuleAdapter;
 import io.meltwin.scyblaster.minecraft.dto.assets.AssetsIndex;
@@ -32,6 +31,7 @@ import io.meltwin.scyblaster.minecraft.dto.version.Argument;
 import io.meltwin.scyblaster.minecraft.dto.version.Library;
 import io.meltwin.scyblaster.minecraft.dto.version.Rule;
 import io.meltwin.scyblaster.minecraft.dto.version.Version;
+import io.meltwin.scyblaster.types.ClassPath;
 
 /**
  * 
@@ -43,9 +43,9 @@ public class AssetsManager {
 
     private static final String TIME_TAKEN = "Took %s ms";
 
-    public AssetsManager(int mcVersionID) {
+    public AssetsManager(int mcVersionID, @NotNull ClassPath cp) {
         this.versionID = mcVersionID;
-        errored = getVersionMetaData() || downloadClient() || downloadLibs() || getAssetsIndex() || downloadAssets();
+        errored = getVersionMetaData() || downloadClient() || downloadLibs(cp) || getAssetsIndex() || downloadAssets();
     }
 
     /**
@@ -181,7 +181,7 @@ public class AssetsManager {
      * 
      * @return true if an error occured
      */
-    private boolean downloadLibs() {
+    private boolean downloadLibs(@NotNull ClassPath cp) {
         logger.info("Retrieving Minecraft libs from distant.");
         try {
             List<ResourceFile> filesList = getLibsFiles();
@@ -193,6 +193,7 @@ public class AssetsManager {
                 ResourceFile resultFile = future.get();
                 if (resultFile.status == ResourceStatus.ERROR)
                     return true;
+                cp.append(resultFile.localPath);
             }
             logger.info(String.format(TIME_TAKEN, Math.round((System.nanoTime() - start) / 1E6)));
             return false;

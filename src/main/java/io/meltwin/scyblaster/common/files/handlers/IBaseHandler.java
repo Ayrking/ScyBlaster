@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.files.handlers;
+package io.meltwin.scyblaster.common.files.handlers;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import io.meltwin.scyblaster.files.types.ResourceFile;
+import io.meltwin.scyblaster.common.files.types.ResourceFile;
 
 public interface IBaseHandler {
 

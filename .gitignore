@@ -150,3 +150,5 @@ local.properties
 .history/
 build/
 **/test
+logs/
+application-*.log

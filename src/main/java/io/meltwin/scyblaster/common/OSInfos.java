@@ -11,4 +11,19 @@ public abstract class OSInfos {
     public static final boolean IS_SOLARIS = (OS.indexOf("sunos") >= 0);
 
     public static final String SEPARATOR = (IS_WINDOWS) ? "\\" : "/";
+
+    public static final String getOS() {
+        if (IS_WINDOWS)
+            return "windows";
+        if (IS_MAC)
+            return "osx";
+        if (IS_UNIX)
+            return "linux";
+        if (IS_SOLARIS)
+            return "sun";
+        return "";
+
+    }
+
+    public static final String ARCH = System.getProperty("os.arch");
 }

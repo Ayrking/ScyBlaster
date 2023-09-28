@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.files.handlers;
+package io.meltwin.scyblaster.common.files.handlers;
 
 import java.io.File;
 import java.net.URL;
@@ -7,12 +7,13 @@ import java.util.concurrent.Future;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import io.meltwin.scyblaster.common.files.types.ResourceFile;
+import io.meltwin.scyblaster.common.files.types.ResourceStatus;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import io.meltwin.scyblaster.files.types.ResourceFile;
-import io.meltwin.scyblaster.files.types.ResourceStatus;
 
 public class HTTPHandler implements IBaseHandler {
 

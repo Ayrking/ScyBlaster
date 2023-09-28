@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.Gson;
 
-import io.meltwin.scyblaster.files.ResourceHandler;
-import io.meltwin.scyblaster.files.types.FileType;
-import io.meltwin.scyblaster.files.types.ResourceFile;
-import io.meltwin.scyblaster.files.types.ResourceStatus;
+import io.meltwin.scyblaster.common.files.ResourceHandler;
+import io.meltwin.scyblaster.common.files.types.FileType;
+import io.meltwin.scyblaster.common.files.types.ResourceFile;
+import io.meltwin.scyblaster.common.files.types.ResourceStatus;
 import io.meltwin.scyblaster.minecraft.dto.versionList.MCVersionsList;
 
 public class MCVersions {

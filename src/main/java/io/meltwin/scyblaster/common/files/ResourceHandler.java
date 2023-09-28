@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.files;
+package io.meltwin.scyblaster.common.files;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
 import io.meltwin.scyblaster.Launcher;
 import io.meltwin.scyblaster.common.FutureCluster;
 import io.meltwin.scyblaster.common.OSInfos;
-import io.meltwin.scyblaster.files.handlers.IBaseHandler;
-import io.meltwin.scyblaster.files.types.FileType;
-import io.meltwin.scyblaster.files.types.ResourceFile;
-import io.meltwin.scyblaster.files.handlers.HTTPHandler;
+import io.meltwin.scyblaster.common.files.handlers.HTTPHandler;
+import io.meltwin.scyblaster.common.files.handlers.IBaseHandler;
+import io.meltwin.scyblaster.common.files.types.FileType;
+import io.meltwin.scyblaster.common.files.types.ResourceFile;
 
 /**
  * Resource handling class
@@ -77,7 +77,7 @@ public class ResourceHandler {
      * @return a list of futures to wait for completion
      */
     public static FutureCluster<ResourceFile> prepareFiles(
-            @NotNull List<io.meltwin.scyblaster.files.types.ResourceFile> files) {
+            @NotNull List<io.meltwin.scyblaster.common.files.types.ResourceFile> files) {
         FutureCluster<ResourceFile> out = new FutureCluster<>();
         for (ResourceFile file : files)
             out.add(instance().internalPreparation(file));
