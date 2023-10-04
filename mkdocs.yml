@@ -1,6 +1,7 @@
 site_name: Scyblaster
 nav:
   - Home: index.md
+  - Get Started: get-started.md
 theme: readthedocs
 
 docs_dir: src
