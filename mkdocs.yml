@@ -1,0 +1,7 @@
+site_name: Scyblaster
+nav:
+  - Home: index.md
+theme: readthedocs
+
+docs_dir: src
+site_dir: docs
