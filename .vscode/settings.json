@@ -8,7 +8,8 @@
         "**/Thumbs.db": true,
         ".idea": true,
         "common/target": true,
-        ".vscode": true
+        ".vscode": true,
+        "/home/meltwin/Prog/Projects/Scyblaster-Data/src/formats/scyblaster/__pycache__": true
     },
     "hide-files.files": [
         ".idea",
@@ -18,5 +19,10 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.project.sourcePaths": [
         ""
-    ]
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "python.analysis.typeCheckingMode": "basic"
 }
