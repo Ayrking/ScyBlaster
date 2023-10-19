@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.types;
+package io.meltwin.scyblaster.common.types;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +15,6 @@ public class ClassPath {
     }
 
     public String getString() {
-        return builder.reverse().deleteCharAt(0).reverse().toString();
+        return builder.deleteCharAt(builder.length() - 1).toString();
     }
 }

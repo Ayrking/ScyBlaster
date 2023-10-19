@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import io.meltwin.scyblaster.common.resources.handlers.HTTPHandler;
 import io.meltwin.scyblaster.common.resources.handlers.IBaseHandler;
@@ -23,11 +24,9 @@ import io.meltwin.scyblaster.common.types.Logging;
  */
 public class ResourceHandler implements Logging {
 
-    /*
-     * ########################################
-     * INSTANCE HANDLING
-     * ########################################
-     */
+    // ====================================================================
+    // Instance Handling
+    // ====================================================================
     private static ResourceHandler instance = null;
 
     private ResourceHandler() {
@@ -45,15 +44,18 @@ public class ResourceHandler implements Logging {
         return instance;
     }
 
-    public static void destroy() {
-        instance = null;
+    public static void destroy() throws InterruptedException {
+        if (instance == null)
+            return;
+
+        // Ending executors
+        instance.executor.shutdownNow();
+        instance.executor.awaitTermination(500, TimeUnit.SECONDS);
     }
 
-    /*
-     * ########################################
-     * File Preparation
-     * ########################################
-     */
+    // ====================================================================
+    // File
+    // ====================================================================
     private ExecutorService executor = Executors.newFixedThreadPool(3);
     private EnumMap<ResourceType, IBaseHandler> handlers;
 

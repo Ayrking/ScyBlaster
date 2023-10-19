@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.meltwin.scyblaster.common.resources.types.JSONWrapper;
+import io.meltwin.scyblaster.common.resources.dto.JSONWrapper;
 import io.meltwin.scyblaster.common.resources.types.ResourceFile;
 import io.meltwin.scyblaster.common.resources.types.ResourceType;
 import io.meltwin.scyblaster.config.ProjectConfiguration;
@@ -46,7 +46,7 @@ public final class AssetIndex extends JSONWrapper<DTOAssetsIndex> {
     public final @NotNull List<ResourceFile> getAssetsList(@NotNull ProjectConfiguration projectConfig) {
         ArrayList<ResourceFile> resourceList = new ArrayList<>();
 
-        for (Entry<String, DTOAssetsIndex.Asset> entry : jsonObject.objects.entrySet())
+        for (Entry<String, DTOAssetsIndex.Asset> entry : object.objects.entrySet())
             resourceList.add(makeAssetFile(projectConfig, entry.getValue().hash));
 
         return resourceList;

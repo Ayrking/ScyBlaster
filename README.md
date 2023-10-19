@@ -1,40 +1,54 @@
-<h1 align="center">ScyBlaster</h1>
+<div style="display:flex;flex-direction:row;align-items:center;margin-bottom:3em">
+     <div style="flex:2"></div>
+     <div style="flex:1; border:1px solid orange;"></div>
+     <div style="padding:0 1em;border:1px solid orange;border-radius:10%; margin-bottom:0;">
+          <h1 align="center">SCYBLASTER</h1>
+          <p style="padding-top:0;margin-top:-1.5em;" align="center">by Meltwin</p>
+     </div>
+     <div style="flex:1; border:1px solid orange;"></div>
+     <div style="flex:2"></div>
+</div>
 
-ScyBlaster is a project of a customizable Java Minecraft Launcher. 
-Its goal is to let anyone make his own launcher.
-
-It is more axed to small server project than for one person.
+ScyBlaster is a project of an easily customizable Java Minecraft Launcher. 
+Its goal is to let anyone make his own launcher. While it's more axed to small server project than for one person, it may be used in several cases.
 
 This project is under GNU AGPLv3 license.
 
-## Decomposition
+## Minecraft datas
 
-This project is divided in three modules :
-
-- **Commons :** include everything that could be used by other modules,
-- **Starter :** responsible for downloading the launcher, making sure it is up-to-date,
-- **Launcher :** responsible for launching the predefined Minecraft.
+To make this API, I had to look and investigate for some informations on how to make a working launcher. You can found everything (the scripts and results) on [this repository](https://github.com/Meltwin/Scyblaster-Data), or if you only want a summary from the raw results you can check [the online documentation](https://meltwin.github.io/Scyblaster-Data/).
 
 ## Making your own launcher
 
-You can make your own launcher by cloning this repository and configuring a bit some parameters.
+The simplest launcher you can make can be written as:
 
-- If you want to customize a bit the GUI, you can just change the JSON configuration files,
-- If you need an advanced customization, you can change some lines of code directly.
+```Java
+package io.meltwin.mylauncher;
 
-Once you're okay with your configurations, you can build them (see [Build](#Build)).
+import io.meltwin.scyblaster.common.types.Logging;
+import io.meltwin.scyblaster.config.ProjectConfiguration;
+import io.meltwin.scyblaster.config.ProjectConfigurationBuilder;
 
-You can find documentation on how to customize your launcher on the [wiki](https://github.com/Meltwin/ScyBlaster/wiki).
+public class Launcher {
+    public static void main(String[] args) {
+        ProjectConfiguration configs = new ProjectConfigurationBuilder("project.xml").make();
+        try (ScyblasterAPI api = new ScyblasterAPI(configs)) {
+            api.launchMC("1.20.2");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
-## Build
+To make a more advanced launcher, check [the documentation](https://meltwin.github.io/ScyBlaster/docs/get-started/) for a detailled explanation about the undergoing working schema.
 
-To build the launcher, you can just type the following command at the root of the project.
+## Directories structures
 
-     mvn install
+The directories are decomposed as:
 
-It will generate the starter and the launcher at :
+- **common/** for classes and interfaces that will be used accross the whole project,
+- **config/** for the logic about the configuration system for the whole launcher
+- **minecraft/** for everything deeply linked to MC API or works
 
-- __Starter__   : ./build/ScyblasterStarter-***Version***.jar
-- __Launcher__  : ./build/ScyblasterLauncher-***Version***.jar
-
-<p align="center"><i> Copyright © - 2022 <a href="https://github.com/Meltwin">Meltwin</a> </i></p>
+For a detailled explanation of the undergoing work, please check [the documentation](https://meltwin.github.io/ScyBlaster/docs/). If you are interested in helping improving this API, you can also find everything you may need on the online documentation.

@@ -3,9 +3,6 @@ package io.meltwin.scyblaster;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.meltwin.scyblaster.minecraft.AssetsHub;
-import io.meltwin.scyblaster.types.ClassPath;
-
 public class Launcher {
 
     public static final Logger logger = LogManager.getLogger("Scyblaster");

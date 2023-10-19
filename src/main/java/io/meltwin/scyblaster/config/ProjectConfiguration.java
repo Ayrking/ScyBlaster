@@ -1,5 +1,6 @@
 package io.meltwin.scyblaster.config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Path;
@@ -70,12 +71,17 @@ public class ProjectConfiguration implements Logging, Serializable {
      *                jar achive.
      */
     public ProjectConfiguration(@NotNull String pkgfile) {
-        InputStream istream = getClass().getClassLoader().getResourceAsStream(pkgfile);
-        if (istream == null) {
-            log().fatal(String.format("File %s doesn't exist inside the jar archive !", pkgfile));
-            System.exit(-1);
+        try {
+            InputStream istream = getClass().getClassLoader().getResourceAsStream(pkgfile);
+            if (istream == null) {
+                log().fatal(String.format("File %s doesn't exist inside the jar archive !", pkgfile));
+                System.exit(-1);
+            }
+            fromInputStream(istream);
+            istream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        fromInputStream(istream);
     }
 
     // ====================================================================

@@ -3,7 +3,7 @@ package io.meltwin.scyblaster.minecraft.releases;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import io.meltwin.scyblaster.common.resources.types.JSONWrapper;
+import io.meltwin.scyblaster.common.resources.dto.JSONWrapper;
 import io.meltwin.scyblaster.common.resources.types.ResourceFile;
 import io.meltwin.scyblaster.common.resources.types.ResourceType;
 import io.meltwin.scyblaster.config.ProjectConfiguration;
@@ -35,8 +35,8 @@ public final class VersionsManifest extends JSONWrapper<DTOVersionsManifest> {
      * @param versionNumber the number index of the version
      */
     public final @NotNull String getVersionName(int versionNumber) {
-        return (versionNumber < this.jsonObject.versions.length && versionNumber >= 0)
-                ? this.jsonObject.versions[versionNumber].id
+        return (versionNumber < this.object.versions.length && versionNumber >= 0)
+                ? this.object.versions[versionNumber].id
                 : "Unknown";
     }
 
@@ -48,8 +48,8 @@ public final class VersionsManifest extends JSONWrapper<DTOVersionsManifest> {
     public final int getVersionID(@NotNull String versionName) {
         // If null or empty
         if (versionName != null && !versionName.isEmpty()) {
-            for (int idx = 0; idx < this.jsonObject.versions.length; idx++) {
-                if (this.jsonObject.versions[idx].id.equals(versionName))
+            for (int idx = 0; idx < this.object.versions.length; idx++) {
+                if (this.object.versions[idx].id.equals(versionName))
                     return idx;
             }
         }
@@ -60,7 +60,7 @@ public final class VersionsManifest extends JSONWrapper<DTOVersionsManifest> {
      * Get the total number of versions
      */
     public final int getNumberOfVersions() {
-        return this.jsonObject.versions.length;
+        return this.object.versions.length;
     }
 
     /**
@@ -72,10 +72,10 @@ public final class VersionsManifest extends JSONWrapper<DTOVersionsManifest> {
     public final @Nullable ResourceFile getVersionResource(@NotNull ProjectConfiguration projectConfig,
             int versionIdx) {
         // Check if version exist
-        if (versionIdx >= this.jsonObject.versions.length || versionIdx < 0)
+        if (versionIdx >= this.object.versions.length || versionIdx < 0)
             return null;
 
-        VersionItem item = this.jsonObject.versions[versionIdx];
+        VersionItem item = this.object.versions[versionIdx];
 
         return new ResourceFile(item.url, ResourceType.HTTP,
                 projectConfig.getVersionsPath().resolve(item.id).resolve(item.id + ".json").toString(), item.sha1,

@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.common.resources.types;
+package io.meltwin.scyblaster.common.resources.dto;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -13,20 +13,19 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonSyntaxException;
 
-import io.meltwin.scyblaster.common.types.Logging;
+import io.meltwin.scyblaster.common.resources.types.ResourceFile;
+import io.meltwin.scyblaster.common.resources.types.ResourceStatus;
 
 /**
  * JSON Wrapper class for processing the parsing of JSON files and make it into
  * a Java Object.
  */
-public class JSONWrapper<T> implements Logging {
+public class JSONWrapper<T> extends DTOWrapper<T> {
     /**
      * Meta class for the map of the DTO adapter
      */
     public class AdapterList extends HashMap<Class, JsonDeserializer> {
     }
-
-    protected final T jsonObject;
 
     /**
      * Make a wrapper for the given class
@@ -35,7 +34,7 @@ public class JSONWrapper<T> implements Logging {
      * @param classT the class of the DTO Java object we are making
      */
     protected JSONWrapper(@NotNull ResourceFile file, Class<T> classT) {
-        jsonObject = this.parseDTO(file, classT);
+        super(file, classT);
     }
 
     /**
@@ -52,7 +51,8 @@ public class JSONWrapper<T> implements Logging {
      * @param cT         the class of the object to make
      * @return a Java DTO object or null if there was an error
      */
-    private final @Nullable T parseDTO(@NotNull ResourceFile assetIndex, Class<T> cT) {
+    @Override
+    protected final @Nullable T parseDTO(@NotNull ResourceFile assetIndex, Class<T> cT) {
         try {
             try {
                 if (assetIndex.status == ResourceStatus.READY) {
@@ -81,13 +81,5 @@ public class JSONWrapper<T> implements Logging {
             e.printStackTrace();
             return null;
         }
-    }
-
-    /**
-     * @return The Java object that we constructed. May return a null value if there
-     *         was an error.
-     */
-    public final @Nullable T getObject() {
-        return this.jsonObject;
     }
 }
