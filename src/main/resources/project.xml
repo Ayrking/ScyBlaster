@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <resources base-dir=".scyblaster">
+        <assets>sc-assets</assets>
+        <libs>sc-libs</libs>
+        <versions>sc-versions</versions>
+        <natives>sc-natives</natives>
     </resources>
-    <minecraft type="single" version="1.20.1">
+    <minecraft type="single" version="1.20.1" online="false">
+        <isDemo>true</isDemo>
+        <quickplay-online>mc.scyblaster.net</quickplay-online>
+        <quickplay-single>single</quickplay-single>
+        <quickplay-realms>reamls.scyblaster.net</quickplay-realms>
     </minecraft>
+    <endpoints>
+        <versions>https://piston-meta.mojang.com/mc/game/version_manifest_v2.json</versions>
+        <assets>https://resources.download.minecraft.net/</assets>
+    </endpoints>
 </project>

@@ -2,9 +2,10 @@ package io.meltwin.scyblaster.config;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import io.meltwin.scyblaster.common.types.Logging;
 import io.meltwin.scyblaster.common.types.Pair;
 
-class VersionAdapter extends XmlAdapter<String, Pair<String, String>> {
+class VersionAdapter extends XmlAdapter<String, Pair<String, String>> implements Logging {
 
     @Override
     public String marshal(Pair<String, String> v) throws Exception {
@@ -13,7 +14,14 @@ class VersionAdapter extends XmlAdapter<String, Pair<String, String>> {
 
     @Override
     public Pair<String, String> unmarshal(String version) throws Exception {
-        String[] parts = version.split("|");
+        String[] parts = version.split("->");
+        // Logging unmarshal
+        ftrace("Unmarshalling version: %s", version);
+        for (String s : parts) {
+            ftrace("\t %s", s);
+        }
+
+        // Export
         Pair<String, String> out = new Pair<>("", "");
         if (parts.length >= 2) {
             out.setFirst(parts[0]);
