@@ -71,14 +71,12 @@ public class ProjectConfiguration implements Logging, Serializable {
      *                jar achive.
      */
     public ProjectConfiguration(@NotNull String pkgfile) {
-        try {
-            InputStream istream = getClass().getClassLoader().getResourceAsStream(pkgfile);
+        try (InputStream istream = getClass().getClassLoader().getResourceAsStream(pkgfile)) {
             if (istream == null) {
                 log().fatal(String.format("File %s doesn't exist inside the jar archive !", pkgfile));
                 System.exit(-1);
             }
             fromInputStream(istream);
-            istream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -256,6 +254,7 @@ public class ProjectConfiguration implements Logging, Serializable {
     static final String DEBUG_VERSION = "\tVERSION: %1$-16s - %2$s\n";
     static final String DEBUG_ALLOWED_VERSION = "\n\tMC Versions: %1$s | %2$s -> %3$s\n";
     static final String DEBUG_IS_DEMO = "\tDemo Mode : %b\n";
+    static final String DEBUG_IS_ONLINE = "\tOnline : %b\n";
     static final String DEBUG_QUICKPLAY = "\n\tQuickplay:\n\t\tSingleplayer: %1$s\n\t\tMultiplayer: %2$s\n\t\tRealms: %3$s\n";
 
     static final String DEBUG_ENDPOINTS = "\n\tEndpoints roots:\n\t\tMANIFEST: %1$s\n\t\tASSETS:   %2$s";
@@ -270,9 +269,10 @@ public class ProjectConfiguration implements Logging, Serializable {
                 String.format(DEBUG_NATIVES, getNativesDirName(), getNativesPath()));
         builder.append(
                 String.format(DEBUG_VERSION, getVersionsDirName(), getVersionsPath()));
-        builder.append(String.format(DEBUG_ALLOWED_VERSION, getAllowedMCVersionNumber(),
+        builder.append(String.format(DEBUG_ALLOWED_VERSION, getAllowedMCVersionNumber().toString(),
                 getAllowedMCVersions().getFirst(), getAllowedMCVersions().getSecond()));
         builder.append(String.format(DEBUG_IS_DEMO, isInDemoMode()));
+        builder.append(String.format(DEBUG_IS_ONLINE, isOnline()));
         builder.append(String.format(DEBUG_QUICKPLAY, getQuickplaySingleplayer(), getQuickplayMultiplayer(),
                 getQuickplayRealms()));
         builder.append(String.format(DEBUG_ENDPOINTS, getVersionsManifestEndpoints(), getAssetsRootEndpoints()));
