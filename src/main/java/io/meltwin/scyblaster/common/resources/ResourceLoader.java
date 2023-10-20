@@ -35,10 +35,10 @@ public interface ResourceLoader extends Logging {
 
         // Try to download all the files
         UnavailableResourceException exception = null;
+        FutureCluster<ResourceFile> fileCluster = ResourceHandler.prepareFiles(fileList);
         fileList = new ArrayList<>();
         try {
             long start = System.nanoTime();
-            FutureCluster<ResourceFile> fileCluster = ResourceHandler.prepareFiles(fileList);
             for (Future<ResourceFile> fut : fileCluster) {
                 if (exception != null) {
                     fut.cancel(true);
