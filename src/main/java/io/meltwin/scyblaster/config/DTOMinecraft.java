@@ -9,32 +9,26 @@ import org.jetbrains.annotations.NotNull;
 import io.meltwin.scyblaster.common.types.Pair;
 
 class DTOMinecraft {
-    /*
-     * ========================================================================
-     * Version Type
-     * ========================================================================
-     */
-    private VersionType type = VersionType.ALL;
 
-    @XmlAttribute(name = "type", required = true)
-    public void setType(String type) {
-        this.type = VersionType.fromValue(type);
-    }
+    // ========================================================================
+    // Version Type
+    // ========================================================================
+    private VersionType versionType = VersionType.ALL;
 
+    @XmlAttribute(name = "type")
+    @XmlJavaTypeAdapter(VersionTypeAdapter.class)
     public void setType(VersionType type) {
-        this.type = type;
+        this.versionType = type;
     }
 
     @NotNull
     public VersionType getType() {
-        return type;
+        return versionType;
     }
 
-    /*
-     * ========================================================================
-     * Online authentification
-     * ========================================================================
-     */
+    // ========================================================================
+    // Online authentification
+    // ========================================================================
     private boolean isOnline = true;
 
     @XmlAttribute(name = "online", required = true)
@@ -47,11 +41,9 @@ class DTOMinecraft {
         return this.isOnline;
     }
 
-    /*
-     * ========================================================================
-     * Version Range
-     * ========================================================================
-     */
+    // ========================================================================
+    // Version Range
+    // ========================================================================
     private Pair<String, String> versions = new Pair<>("", "");
 
     @XmlAttribute(name = "version")
@@ -65,12 +57,9 @@ class DTOMinecraft {
         return versions;
     }
 
-    /*
-     * ========================================================================
-     * Demo
-     * ========================================================================
-     */
-
+    // ========================================================================
+    // Demo
+    // ========================================================================
     private boolean _isDemo = false;
 
     @XmlElement(name = "isDemo")
@@ -82,11 +71,9 @@ class DTOMinecraft {
         return this._isDemo;
     }
 
-    /*
-     * ========================================================================
-     * QuickPlay (Multiplayer)
-     * ========================================================================
-     */
+    // ========================================================================
+    // QuickPlay (Multiplayer)
+    // ========================================================================
     private String _quickplayM = null;
 
     @XmlElement(name = "quickplay-online")
@@ -98,11 +85,9 @@ class DTOMinecraft {
         return this._quickplayM;
     }
 
-    /*
-     * ========================================================================
-     * QuickPlay (Singleplayer)
-     * ========================================================================
-     */
+    // ========================================================================
+    // QuickPlay (Singleplayer)
+    // ========================================================================
     private String _quickplayS = null;
 
     @XmlElement(name = "quickplay-single")
@@ -114,11 +99,9 @@ class DTOMinecraft {
         return this._quickplayS;
     }
 
-    /*
-     * ========================================================================
-     * QuickPlay (Realms)
-     * ========================================================================
-     */
+    // ========================================================================
+    // QuickPlay (Realms)
+    // ========================================================================
     private String _quickplayR = null;
 
     @XmlElement(name = "quickplay-realms")

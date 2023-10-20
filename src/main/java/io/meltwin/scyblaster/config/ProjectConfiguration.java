@@ -269,7 +269,7 @@ public class ProjectConfiguration implements Logging, Serializable {
                 String.format(DEBUG_NATIVES, getNativesDirName(), getNativesPath()));
         builder.append(
                 String.format(DEBUG_VERSION, getVersionsDirName(), getVersionsPath()));
-        builder.append(String.format(DEBUG_ALLOWED_VERSION, getAllowedMCVersionNumber(),
+        builder.append(String.format(DEBUG_ALLOWED_VERSION, getAllowedMCVersionNumber().toString(),
                 getAllowedMCVersions().getFirst(), getAllowedMCVersions().getSecond()));
         builder.append(String.format(DEBUG_IS_DEMO, isInDemoMode()));
         builder.append(String.format(DEBUG_IS_ONLINE, isOnline()));
