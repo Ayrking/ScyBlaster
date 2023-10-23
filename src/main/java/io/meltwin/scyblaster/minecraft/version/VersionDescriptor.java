@@ -94,19 +94,33 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
     }
 
     /**
-     * Make the classpath needed for launching the Minecraft client
+     * Make a new ClassPath object filled with the needed files from the vanilla
+     * version
      * 
      * @param projectConfig the project configuration for getting the libraries and
      *                      version directory
+     * @return the classpath object
+     */
+    public final @NotNull ClassPath getNewClassPath(@NotNull ProjectConfiguration projectConfig) {
+        ClassPath cp = new ClassPath();
+        addToClassPath(projectConfig, cp);
+        return cp;
+    }
+
+    /**
+     * Append the files for the vanilla version
+     * 
+     * @param projectConfig the project configuration for getting the libraries and
+     *                      version directory
+     * @param cp            the classpath object
+     * 
      * @return the classpath under a string form
      */
-    public final @NotNull String getClassPath(@NotNull ProjectConfiguration projectConfig) {
-        ClassPath cp = new ClassPath();
+    public final @NotNull void addToClassPath(@NotNull ProjectConfiguration projectConfig, ClassPath cp) {
         cp.append(getClientJARResource(projectConfig).localPath.toString());
         for (ResourceFile file : getLibsFiles(projectConfig)) {
             cp.append(file.localPath.toString());
         }
-        return cp.getString();
     }
 
 }

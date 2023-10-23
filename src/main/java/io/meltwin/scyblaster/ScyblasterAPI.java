@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import io.meltwin.scyblaster.common.exceptions.*;
 import io.meltwin.scyblaster.common.resources.ResourceHandler;
 import io.meltwin.scyblaster.common.types.Logging;
+import io.meltwin.scyblaster.config.ConfigHolder;
 import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 import io.meltwin.scyblaster.minecraft.AssetsHub;
 import io.meltwin.scyblaster.minecraft.version.VersionDescriptor;
@@ -16,16 +17,19 @@ import io.meltwin.scyblaster.minecraft.version.VersionDescriptor;
 public class ScyblasterAPI implements Logging, AutoCloseable {
 
     private AssetsHub hub = null;
-    private final ProjectConfiguration projectConfig;
+    private static final ConfigHolder configs = new ConfigHolder();
 
     public ScyblasterAPI(final @NotNull ProjectConfiguration projectConfig) {
-        this.projectConfig = projectConfig;
+        configs.clear();
+        configs.projectConfig = projectConfig;
+        hub = new AssetsHub(ScyblasterAPI.configs.projectConfig);
     }
 
     @Override
     public void close() throws Exception {
         finfo("Shutting down Scyblaster API !");
         ResourceHandler.destroy();
+        configs.clear();
     }
 
     // ====================================================================
@@ -35,20 +39,18 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      * Return the ProjectConfiguration instance used for this launcher
      */
     public final @NotNull ProjectConfiguration getProjectConfiguration() {
-        return this.projectConfig;
+        return ScyblasterAPI.configs.projectConfig;
     }
 
     /**
      * Return an instantiated AssetsHub object
      */
     public final @NotNull AssetsHub getAssetsHub() {
-        if (hub == null)
-            hub = new AssetsHub(this.projectConfig);
         return hub;
     }
 
     // ====================================================================
-    // Launcher STEPS
+    // PART A - Resource Preparation
     // ====================================================================
 
     /**
@@ -59,7 +61,7 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      */
     public final @Nullable VersionDescriptor getVersion(@NotNull String version)
             throws UnavailableResourceException, NullManifestException, InvalidWrapperException {
-        return getAssetsHub().getVersionsDescriptor(version);
+        return hub.getVersionsDescriptor(version);
     }
 
     /**
@@ -70,7 +72,7 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      */
     public final @Nullable VersionDescriptor getVersion(int version)
             throws UnavailableResourceException, NullManifestException, InvalidWrapperException {
-        return getAssetsHub().getVersionsDescriptor(version);
+        return hub.getVersionsDescriptor(version);
     }
 
     /**
@@ -81,7 +83,7 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      */
     public final void prepareResource(@NotNull VersionDescriptor version)
             throws NullDescriptorException, NullIndexException, UnavailableResourceException, InvalidWrapperException {
-        getAssetsHub().prepareVersion(version);
+        hub.prepareVersion(version);
     }
 
     // ====================================================================
@@ -93,7 +95,7 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      */
     public final void launchMC(@NotNull String version) {
         try {
-            log().debug(projectConfig);
+            log().debug(ScyblasterAPI.configs.projectConfig);
             VersionDescriptor desc = getVersion(version);
             prepareResource(desc);
         } catch (ScyblasterException e) {
