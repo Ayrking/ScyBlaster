@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import io.meltwin.scyblaster.common.resources.dto.JSONWrapper;
 import io.meltwin.scyblaster.common.resources.types.ResourceFile;
 import io.meltwin.scyblaster.common.resources.types.ResourceType;
-import io.meltwin.scyblaster.config.ProjectConfiguration;
+import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 
 /**
  * Class to manage the Minecraft AssetIndex file.

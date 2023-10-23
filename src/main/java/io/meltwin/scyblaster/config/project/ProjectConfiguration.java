@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.project;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ import io.meltwin.scyblaster.common.types.Pair;
  */
 public class ProjectConfiguration implements Logging, Serializable {
 
-    private DTOConfigs configs;
+    private transient DTOConfigs configs;
 
     // ====================================================================
     // --------------------------------------------------------------------

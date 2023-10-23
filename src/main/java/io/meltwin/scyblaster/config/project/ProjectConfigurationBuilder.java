@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.project;
 
 import java.io.InputStream;
 
@@ -122,10 +122,9 @@ public class ProjectConfigurationBuilder {
      * 
      * @param versions the version allowed
      */
-    public ProjectConfigurationBuilder setAllowedMCVersion(int version) {
+    public ProjectConfigurationBuilder setAllowedMCVersion(@NotNull String version) {
         projectConfig.getConfigs().getMinecraftConfigs().setType(VersionType.SINGLE);
-        // projectConfig.getConfigs().getMinecraftConfigs().setVersions(new
-        // Pair<>(version, version));
+        projectConfig.getConfigs().getMinecraftConfigs().setVersions(new Pair<>(version, version));
         return this;
     }
 

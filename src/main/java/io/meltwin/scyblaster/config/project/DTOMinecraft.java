@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.project;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,56 +60,56 @@ class DTOMinecraft {
     // ========================================================================
     // Demo
     // ========================================================================
-    private boolean _isDemo = false;
+    private boolean isDemo = false;
 
     @XmlElement(name = "isDemo")
-    public void setDemo(boolean _isDemo) {
-        this._isDemo = _isDemo;
+    public void setDemo(boolean isDemo) {
+        this.isDemo = isDemo;
     }
 
     public boolean isDemo() {
-        return this._isDemo;
+        return this.isDemo;
     }
 
     // ========================================================================
     // QuickPlay (Multiplayer)
     // ========================================================================
-    private String _quickplayM = null;
+    private String quickplayM = null;
 
     @XmlElement(name = "quickplay-online")
-    public void setQuickPlayM(String _quickplay) {
-        this._quickplayM = _quickplay;
+    public void setQuickPlayM(String quickplay) {
+        this.quickplayM = quickplay;
     }
 
     public String getQuickPlayM() {
-        return this._quickplayM;
+        return this.quickplayM;
     }
 
     // ========================================================================
     // QuickPlay (Singleplayer)
     // ========================================================================
-    private String _quickplayS = null;
+    private String quickplayS = null;
 
     @XmlElement(name = "quickplay-single")
-    public void setQuickPlayS(String _quickplayS) {
-        this._quickplayS = _quickplayS;
+    public void setQuickPlayS(String quickplayS) {
+        this.quickplayS = quickplayS;
     }
 
     public String getQuickPlayS() {
-        return this._quickplayS;
+        return this.quickplayS;
     }
 
     // ========================================================================
     // QuickPlay (Realms)
     // ========================================================================
-    private String _quickplayR = null;
+    private String quickplayR = null;
 
     @XmlElement(name = "quickplay-realms")
-    public void setQuickPlayR(String _quickplayR) {
-        this._quickplayR = _quickplayR;
+    public void setQuickPlayR(String quickplayR) {
+        this.quickplayR = quickplayR;
     }
 
     public String getQuickPlayR() {
-        return this._quickplayR;
+        return this.quickplayR;
     }
 }

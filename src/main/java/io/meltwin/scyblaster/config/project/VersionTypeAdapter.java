@@ -1,4 +1,4 @@
-package io.meltwin.scyblaster.config;
+package io.meltwin.scyblaster.config.project;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

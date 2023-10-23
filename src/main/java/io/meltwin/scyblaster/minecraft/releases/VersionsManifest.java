@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import io.meltwin.scyblaster.common.resources.dto.JSONWrapper;
 import io.meltwin.scyblaster.common.resources.types.ResourceFile;
 import io.meltwin.scyblaster.common.resources.types.ResourceType;
-import io.meltwin.scyblaster.config.ProjectConfiguration;
+import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 import io.meltwin.scyblaster.minecraft.releases.DTOVersionsManifest.VersionItem;
 
 /**

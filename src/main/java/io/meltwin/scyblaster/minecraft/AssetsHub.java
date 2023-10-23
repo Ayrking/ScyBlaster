@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import io.meltwin.scyblaster.common.exceptions.*;
 import io.meltwin.scyblaster.common.resources.ResourceLoader;
 import io.meltwin.scyblaster.common.resources.dto.DTOLoader;
-import io.meltwin.scyblaster.config.ProjectConfiguration;
+import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 import io.meltwin.scyblaster.minecraft.assets.AssetIndex;
 import io.meltwin.scyblaster.minecraft.releases.VersionsManifest;
 import io.meltwin.scyblaster.minecraft.version.VersionDescriptor;

@@ -1,8 +1,8 @@
 package io.meltwin.scyblaster;
 
 import io.meltwin.scyblaster.common.types.Logging;
-import io.meltwin.scyblaster.config.ProjectConfiguration;
-import io.meltwin.scyblaster.config.ProjectConfigurationBuilder;
+import io.meltwin.scyblaster.config.project.ProjectConfiguration;
+import io.meltwin.scyblaster.config.project.ProjectConfigurationBuilder;
 
 public class Test implements Logging {
     public static void main(String[] args) {

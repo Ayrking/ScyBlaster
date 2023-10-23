@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import io.meltwin.scyblaster.common.exceptions.*;
 import io.meltwin.scyblaster.common.resources.ResourceHandler;
 import io.meltwin.scyblaster.common.types.Logging;
-import io.meltwin.scyblaster.config.ProjectConfiguration;
+import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 import io.meltwin.scyblaster.minecraft.AssetsHub;
 import io.meltwin.scyblaster.minecraft.version.VersionDescriptor;
 
