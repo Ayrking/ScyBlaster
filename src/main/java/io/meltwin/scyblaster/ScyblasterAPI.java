@@ -17,12 +17,12 @@ import io.meltwin.scyblaster.minecraft.version.VersionDescriptor;
 public class ScyblasterAPI implements Logging, AutoCloseable {
 
     private AssetsHub hub = null;
-    private static final ConfigHolder configs = new ConfigHolder();
+    private final ConfigHolder configs = new ConfigHolder();
 
     public ScyblasterAPI(final @NotNull ProjectConfiguration projectConfig) {
         configs.clear();
         configs.projectConfig = projectConfig;
-        hub = new AssetsHub(ScyblasterAPI.configs.projectConfig);
+        hub = new AssetsHub(this.configs.projectConfig);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      * Return the ProjectConfiguration instance used for this launcher
      */
     public final @NotNull ProjectConfiguration getProjectConfiguration() {
-        return ScyblasterAPI.configs.projectConfig;
+        return this.configs.projectConfig;
     }
 
     /**
@@ -95,7 +95,8 @@ public class ScyblasterAPI implements Logging, AutoCloseable {
      */
     public final void launchMC(@NotNull String version) {
         try {
-            log().debug(ScyblasterAPI.configs.projectConfig);
+            // Prepare Vanilla
+            log().debug(this.configs.projectConfig);
             VersionDescriptor desc = getVersion(version);
             prepareResource(desc);
         } catch (ScyblasterException e) {

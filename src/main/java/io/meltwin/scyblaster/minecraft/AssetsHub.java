@@ -41,7 +41,7 @@ public final class AssetsHub implements DTOLoader, ResourceLoader {
     }
 
     // ====================================================================
-    // Versions Manifest V2
+    // Versions Descriptor
     // ====================================================================
     private static final String PREPARING_VERSION = "Preparing version descriptor for version %d (%s)";
 

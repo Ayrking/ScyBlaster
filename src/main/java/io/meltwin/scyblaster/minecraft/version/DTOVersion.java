@@ -6,7 +6,10 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOVersion {
-    public DTOArgumentsList arguments;
+    // Arguments
+    public DTOArgumentsList arguments; // Post F10 (>~ MC 1.12)
+    public String minecraftArguments; // Pre F10 (<~ MC 1.12)
+
     public DTOAssetIndex assetIndex;
     public String assets;
     public int complianceLevel;

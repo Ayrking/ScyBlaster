@@ -9,6 +9,8 @@ import io.meltwin.scyblaster.common.resources.dto.JSONWrapper;
 import io.meltwin.scyblaster.common.resources.types.ResourceFile;
 import io.meltwin.scyblaster.common.resources.types.ResourceType;
 import io.meltwin.scyblaster.common.types.ClassPath;
+import io.meltwin.scyblaster.common.types.LaunchArguments;
+import io.meltwin.scyblaster.config.ConfigHolder;
 import io.meltwin.scyblaster.config.project.ProjectConfiguration;
 
 /**
@@ -20,6 +22,9 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
         super(versionDescriptor, DTOVersion.class);
     }
 
+    // ====================================================================
+    // JSON Loader properties
+    // ====================================================================
     @Override
     protected final @NotNull AdapterList getAdapters() {
         AdapterList adapters = new AdapterList();
@@ -28,6 +33,9 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
         return adapters;
     }
 
+    // ====================================================================
+    // Global Getters
+    // ====================================================================
     /**
      * Return the version name
      */
@@ -44,6 +52,9 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
         return this.object.assets;
     }
 
+    // ====================================================================
+    // ResourceFile making
+    // ====================================================================
     /**
      * Make a ResourceFile for the assets index of this version
      * 
@@ -93,6 +104,9 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
         return libList;
     }
 
+    // ====================================================================
+    // Classpath manipulation
+    // ====================================================================
     /**
      * Make a new ClassPath object filled with the needed files from the vanilla
      * version
@@ -112,15 +126,83 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
      * 
      * @param projectConfig the project configuration for getting the libraries and
      *                      version directory
-     * @param cp            the classpath object
-     * 
-     * @return the classpath under a string form
+     * @param cp            the classpath object to modify
      */
-    public final @NotNull void addToClassPath(@NotNull ProjectConfiguration projectConfig, ClassPath cp) {
+    public final void addToClassPath(@NotNull ProjectConfiguration projectConfig, ClassPath cp) {
         cp.append(getClientJARResource(projectConfig).localPath.toString());
         for (ResourceFile file : getLibsFiles(projectConfig)) {
             cp.append(file.localPath.toString());
         }
     }
 
+    // ====================================================================
+    // Game arguments
+    // ====================================================================
+    /**
+     * Make a new LaunchArguments object filled with the needed args from the
+     * vanilla version
+     * 
+     * @param configHolder the configuration holder for the whole launcher
+     * 
+     * @return the launch arguments object
+     */
+    public final LaunchArguments getNewLaunchArguments(@NotNull ConfigHolder configHolder) {
+        LaunchArguments lArgs = new LaunchArguments();
+        addToLaunchArgs(configHolder, lArgs);
+        return lArgs;
+    }
+
+    /**
+     * Append the arguments for the vanilla version
+     * 
+     * @param configHolder the configuration holder for the whole launcher
+     * @param launchArgs   the launch arguments object to modify
+     */
+    public final void addToLaunchArgs(@NotNull ConfigHolder configHolder, @NotNull LaunchArguments launchArgs) {
+        // Test whether we are post F10 (~ >= MC 1.12)
+        if (this.object.minecraftArguments == null)
+            addLaunchArgsPostF10(configHolder, launchArgs);
+        addLaunchArgsPreF10(launchArgs);
+    }
+
+    /**
+     * Append the arguments for the vanilla version for descriptor format later (or
+     * equal) than F10 (MC 1.12 -> Actual)
+     * 
+     * @see https://meltwin.github.io/Scyblaster-Data/formats/version_descriptor/
+     *      for more informations on the descriptors format
+     * @param launchArgs the launch arguments object to modify
+     */
+    private final void addLaunchArgsPreF10(@NotNull LaunchArguments launchArgs) {
+        launchArgs.addArg(this.object.minecraftArguments);
+    }
+
+    /**
+     * Append the arguments for the vanilla version for descriptor format strictly
+     * earlier than F10 (MC Alpha -> 1.11)
+     * 
+     * @see https://meltwin.github.io/Scyblaster-Data/formats/version_descriptor/
+     *      for more informations on the descriptors format
+     * @param configHolder the configuration holder for the whole launcher
+     * @param launchArgs   the launch arguments object to modify
+     */
+    private final void addLaunchArgsPostF10(@NotNull ConfigHolder configHolder, @NotNull LaunchArguments launchArgs) {
+        // Game arguments
+        for (DTOArgument arg : this.object.arguments.game) {
+            // TODO: Check rules
+
+            for (String s : arg.values)
+                launchArgs.stackString(s);
+        }
+
+        // JVM
+        for (DTOArgument arg : this.object.arguments.jvm) {
+            // TODO: Check rules
+
+            for (String s : arg.values)
+                launchArgs.stackString(s);
+        }
+
+        launchArgs.processStringStack();
+    }
 }
