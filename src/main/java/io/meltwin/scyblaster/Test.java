@@ -7,7 +7,8 @@ import io.meltwin.scyblaster.config.project.ProjectConfigurationBuilder;
 
 public class Test implements Logging {
     public static void main(String[] args) {
-        testLaunchArguments();
+        // testLaunchArguments();
+        launchVersion();
     }
 
     private static final void launchVersion() {

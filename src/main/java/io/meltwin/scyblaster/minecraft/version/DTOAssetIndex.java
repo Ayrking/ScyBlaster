@@ -6,6 +6,6 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOAssetIndex extends DTOFile {
-    public String id;
-    public int totalSize;
+    public final String id = null;
+    public final int totalSize = -1;
 }

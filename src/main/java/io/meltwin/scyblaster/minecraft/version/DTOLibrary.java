@@ -6,6 +6,6 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOLibrary {
-    public DTODownloadDesc downloads;
-    public DTORule[] rules;
+    public final DTODownloadDesc downloads = null;
+    public final DTORule[] rules = null;
 }

@@ -6,8 +6,8 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTODownloads {
-    public DTOFile client;
-    public DTOFile client_mappings;
-    public DTOFile server;
-    public DTOFile server_mappings;
+    public final DTOFile client = null;
+    public final DTOFile client_mappings = null;
+    public final DTOFile server = null;
+    public final DTOFile server_mappings = null;
 }

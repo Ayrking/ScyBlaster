@@ -1,6 +1,6 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOJavaVersion {
-    public String component;
-    public int majorVersion;
+    public final String component = null;
+    public final int majorVersion = -1;
 }

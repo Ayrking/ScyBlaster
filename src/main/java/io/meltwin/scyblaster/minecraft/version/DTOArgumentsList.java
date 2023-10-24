@@ -6,6 +6,6 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOArgumentsList {
-    public DTOArgument[] game;
-    public DTOArgument[] jvm;
+    public final DTOArgument[] game = null;
+    public final DTOArgument[] jvm = null;
 }

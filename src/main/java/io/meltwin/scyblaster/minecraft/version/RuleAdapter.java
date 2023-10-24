@@ -17,12 +17,24 @@ public class RuleAdapter implements JsonDeserializer<DTORule> {
     @Override
     public DTORule deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        DTORule out = new DTORule();
         JsonObject obj = json.getAsJsonObject();
 
         // Action extraction
-        if (obj.has("action"))
-            out.action = obj.get("action").getAsString();
+        DTORule out = null;
+        {
+            String action = null;
+            if (obj.has("action"))
+                action = obj.get("action").getAsString();
+
+            // OS Extraction
+            OS os = null;
+            if (obj.has("os")) {
+                Gson gson = new Gson();
+                os = gson.fromJson(obj.get("os").getAsJsonObject(), OS.class);
+            }
+
+            out = new DTORule(action, os);
+        }
 
         // Features extraction
         if (obj.has("features")) {
@@ -30,12 +42,6 @@ public class RuleAdapter implements JsonDeserializer<DTORule> {
 
             for (Entry<String, JsonElement> entry : features.entrySet())
                 out.features.put(entry.getKey(), entry.getValue().getAsString());
-        }
-
-        // OS Extraction
-        if (obj.has("os")) {
-            Gson gson = new Gson();
-            out.os = gson.fromJson(obj.get("os").getAsJsonObject(), OS.class);
         }
 
         return out;

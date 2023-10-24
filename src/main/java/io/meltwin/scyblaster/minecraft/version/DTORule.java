@@ -8,15 +8,21 @@ package io.meltwin.scyblaster.minecraft.version;
 import java.util.HashMap;
 
 class DTORule {
+
+    DTORule(String action, OS os) {
+        this.action = action;
+        this.os = os;
+    }
+
     public class FeatureMap extends HashMap<String, String> {
     }
 
     public class OS {
-        public String name;
-        public String arch;
+        public final String name = null;
+        public final String arch = null;
     }
 
-    public String action;
-    public FeatureMap features = new FeatureMap();
-    public OS os;
+    public final String action;
+    public final FeatureMap features = new FeatureMap();
+    public final OS os;
 }

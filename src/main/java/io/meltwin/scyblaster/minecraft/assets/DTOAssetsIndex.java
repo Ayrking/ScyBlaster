@@ -5,9 +5,9 @@ import java.util.Map;
 
 class DTOAssetsIndex {
     public class Asset {
-        public String hash = "";
-        public long size = 0;
+        public final String hash = "";
+        public final long size = 0;
     }
 
-    public Map<String, Asset> objects = new HashMap<>();
+    public final Map<String, Asset> objects = new HashMap<>();
 }

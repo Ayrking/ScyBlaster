@@ -6,8 +6,8 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTOFile {
-    public String path; // Local path
-    public String url; // Distant path
-    public String sha1;
-    public int size;
+    public final String path = null; // Local path
+    public final String url = null; // Distant path
+    public final String sha1 = null;
+    public final int size = -1;
 }

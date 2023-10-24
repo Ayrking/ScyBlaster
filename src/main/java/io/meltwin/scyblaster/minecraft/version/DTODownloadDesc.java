@@ -6,6 +6,6 @@
 package io.meltwin.scyblaster.minecraft.version;
 
 class DTODownloadDesc {
-    public DTOFile artifact;
-    public String name;
+    public final DTOFile artifact = null;
+    public final String name = null;
 }
