@@ -3,6 +3,7 @@ package io.meltwin.scyblaster.common.types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +58,7 @@ public final class LaunchArguments {
     /**
      * Add a complete launching arguments string to the object
      * 
-     * @param launchingArg a complete argument string (e.g. "{auth_player_name}
+     * @param launchingArg a complete argument string (e.g. "${auth_player_name}
      *                     ${auth_session} --gameDir ${game_directory} ...")
      */
     public final void addArg(final String launchingArg) {
@@ -119,14 +120,14 @@ public final class LaunchArguments {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("LaunchArguments [\n");
-        for (String key : this.arguments.keySet()) {
-            builder.append("\t- \"" + key + "\"\n");
-            for (String arg : this.arguments.get(key)) {
-                builder.append("\t\t\"" + arg + "\"\n");
+        StringBuilder output = new StringBuilder("LaunchArguments [\n");
+        for (Entry<String, List<String>> entry : this.arguments.entrySet()) {
+            output.append("\t- \"" + entry.getKey() + "\"\n");
+            for (String arg : entry.getValue()) {
+                output.append("\t\t\"" + arg + "\"\n");
             }
         }
-        builder.append("]");
-        return builder.toString();
+        output.append("]");
+        return output.toString();
     }
 }
