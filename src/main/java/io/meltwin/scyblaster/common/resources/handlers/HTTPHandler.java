@@ -1,7 +1,5 @@
 package io.meltwin.scyblaster.common.resources.handlers;
 
-import java.io.File;
-import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 

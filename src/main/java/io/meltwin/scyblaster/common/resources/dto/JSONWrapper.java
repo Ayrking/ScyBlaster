@@ -1,7 +1,6 @@
 package io.meltwin.scyblaster.common.resources.dto;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -24,9 +23,12 @@ public class JSONWrapper<T> extends DTOWrapper<T> {
     /**
      * Meta class for the map of the DTO adapter
      */
-    public class AdapterList extends HashMap<Class, JsonDeserializer> {
+    public class AdapterList extends HashMap<Class<?>, JsonDeserializer<?>> {
     }
 
+    // ====================================================================
+    // Wrapper Properties
+    // ====================================================================
     /**
      * Make a wrapper for the given class
      * 
@@ -44,42 +46,31 @@ public class JSONWrapper<T> extends DTOWrapper<T> {
         return new AdapterList();
     }
 
-    /**
-     * Parse a JSON DTO for further purpose
-     * 
-     * @param assetIndex the resource file to parse
-     * @param cT         the class of the object to make
-     * @return a Java DTO object or null if there was an error
-     */
-    @Override
-    protected final @Nullable T parseDTO(@NotNull ResourceFile assetIndex, Class<T> cT) {
-        try {
-            try {
-                if (assetIndex.status == ResourceStatus.READY) {
-                    // Constructing builder
-                    GsonBuilder builder = new GsonBuilder();
-                    for (Entry<Class, JsonDeserializer> adapter : getAdapters().entrySet()) {
-                        builder.registerTypeAdapter(adapter.getKey(), adapter.getValue());
-                    }
+    // ====================================================================
+    // Loading Logic
+    // ====================================================================
+    private static final String RES_NOT_READY = "The resource %s was not ready !";
+    private static final String JSON_INVALID = "The json file is not corresponding to the Java object representation %s!";
+    private static final String IO_EXCEPTION = "Could not parse the local file for %s!";
 
-                    // Parse JSON DTO
-                    return builder.create().fromJson(new String(Files.readAllBytes(assetIndex.localPath)), cT);
-                }
-                log().error(String.format("The resource %s was not ready !", cT.getSimpleName()));
-            } catch (JsonSyntaxException e) {
-                log().fatal(String.format("The json file is not corresponding to the Java object representation %s!",
-                        cT.getSimpleName()));
-            } catch (IOException e) {
-                log().fatal(String.format("Could not parse the local file for %s!", cT.getSimpleName()));
+    @Override
+    protected final @Nullable T makeJavaDTOObject(@NotNull ResourceFile assetIndex, Class<T> cT) {
+        try {
+            if (assetIndex.status == ResourceStatus.READY) {
+                // Constructing builder
+                GsonBuilder builder = new GsonBuilder();
+                for (Entry<Class<?>, JsonDeserializer<?>> adapter : getAdapters().entrySet())
+                    builder.registerTypeAdapter(adapter.getKey(), adapter.getValue());
+
+                // Parse JSON DTO
+                return builder.create().fromJson(new String(Files.readAllBytes(assetIndex.localPath)), cT);
             }
-            return cT.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                | SecurityException | NoSuchMethodException e) {
-            log().fatal(String.format(
-                    "Could not initialise default %s object. Please check the constructors and make sure they are public and one of them don't take any arguments.",
-                    cT.getName()));
-            e.printStackTrace();
-            return null;
+            ferror(RES_NOT_READY, cT.getSimpleName());
+        } catch (JsonSyntaxException e) {
+            ffatal(JSON_INVALID, cT.getSimpleName());
+        } catch (IOException e) {
+            ffatal(IO_EXCEPTION, cT.getSimpleName());
         }
+        return null;
     }
 }

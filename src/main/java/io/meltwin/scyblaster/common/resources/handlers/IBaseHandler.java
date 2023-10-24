@@ -31,7 +31,7 @@ public interface IBaseHandler {
      * @return true if the file is present on disc
      */
     default boolean isSameLocally(@NotNull ResourceFile file) {
-        if (file.localPath == null || file.localPath.equals(""))
+        if (file.localPath == null || !file.localPath.toString().isEmpty())
             return true;
 
         // Check presence

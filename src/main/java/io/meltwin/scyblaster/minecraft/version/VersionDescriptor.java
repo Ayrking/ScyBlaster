@@ -93,7 +93,7 @@ public final class VersionDescriptor extends JSONWrapper<DTOVersion> {
         for (DTOLibrary lib : this.object.libraries) {
             // TODO: Rule checking
             // Check if the download field exist (else it's a native)
-            if (false || lib.downloads.artifact == null)
+            if (lib.downloads.artifact == null)
                 continue;
 
             libList.add(new ResourceFile(lib.downloads.artifact.url, ResourceType.HTTP,

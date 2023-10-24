@@ -28,17 +28,14 @@ public interface DTOLoader extends Logging {
      * @param file the resource to fetch
      * @return the wanted Java DTO Wrapper, or null in case of error
      */
-    public default <T extends DTOWrapper> @Nullable T loadDTO(final Class<T> cT,
+    public default <T extends DTOWrapper<?>> @Nullable T loadDTO(final Class<T> cT,
             final @NotNull ResourceFile file)
             throws InvalidWrapperException, UnavailableResourceException {
         try {
             // Prepare file
-            ResourceFile fileResult;
-            {
-                long start = System.nanoTime();
-                fileResult = ResourceHandler.prepareFile(file).get();
-                printDelta(start);
-            }
+            long start = System.nanoTime();
+            ResourceFile fileResult = ResourceHandler.prepareFile(file).get();
+            printDelta(start);
 
             // And load it
             if (fileResult.status == ResourceStatus.READY)
